@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plagioclase | Mineral Data Sheet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #2c3e50;
+            --color-accent: #5a7fa8;
+            --color-accent-light: #8ab4d6;
+            --color-bg: #faf9f7;
+            --color-card: #ffffff;
+            --color-text: #2c3e50;
+            --color-text-muted: #6b7280;
+            --color-border: #e5e2dc;
+            --color-table-header: #f5f3ef;
+            --color-ppl: #e8d4a8;
+            --color-xpl: #a8c8e8;
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -1px rgba(0,0,0,0.04);
+            --radius: 8px;
+            --transition: 0.2s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .en { display: inline; }
+        .de { display: none; }
+        body.lang-de .en { display: none !important; }
+        body.lang-de .de { display: inline !important; }
+        body.lang-en .en { display: inline !important; }
+        body.lang-en .de { display: none !important; }
+
+        .header {
+            background: linear-gradient(135deg, #3a5a7c 0%, #1e3a52 100%);
+            color: white;
+            padding: 2rem 2rem 1.5rem;
+            position: relative;
+        }
+
+        .header-content { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+
+        .mineral-badge {
+            display: inline-block;
+            background: var(--color-accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .mineral-name {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .mineral-formula {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .header-meta { display: flex; gap: 2rem; flex-wrap: wrap; font-size: 0.9rem; opacity: 0.85; }
+        .meta-item { display: flex; align-items: center; gap: 0.5rem; }
+        .meta-label { opacity: 0.7; }
+
+        .lang-toggle {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        .lang-btn.active { background: var(--color-accent); }
+        .lang-btn:hover:not(.active) { background: rgba(255,255,255,0.1); }
+
+        .main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .nav-tab {
+            padding: 0.75rem 1.25rem;
+            border: none;
+            background: transparent;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: var(--transition);
+        }
+        .nav-tab:hover { color: var(--color-text); }
+        .nav-tab.active { color: var(--color-accent); border-bottom-color: var(--color-accent); }
+
+        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--color-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .card-title::before {
+            content: '';
+            width: 4px;
+            height: 1.25rem;
+            background: var(--color-accent);
+            border-radius: 2px;
+        }
+
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        @media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .data-table th, .data-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .data-table th {
+            background: var(--color-table-header);
+            font-weight: 600;
+            color: var(--color-primary);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table tr:hover td { background: var(--color-table-header); }
+
+        .optical-section { border-left: 4px solid var(--color-ppl); padding-left: 1rem; margin-bottom: 1.5rem; }
+        .optical-section.xpl { border-left-color: var(--color-xpl); }
+        .optical-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+        .optical-label.ppl { color: #8b6914; }
+        .optical-label.xpl { color: #1e6091; }
+
+        .image-placeholder {
+            background: linear-gradient(135deg, #f0ede8 0%, #e5e2dc 100%);
+            border: 2px dashed var(--color-border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            color: var(--color-text-muted);
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .image-placeholder-icon { font-size: 2rem; opacity: 0.5; }
+        .image-placeholder-text { font-size: 0.85rem; max-width: 280px; }
+        .image-placeholder-ref {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            background: rgba(0,0,0,0.05);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+        }
+
+        .stability-bar { display: flex; align-items: center; gap: 0.75rem; margin: 0.5rem 0; }
+        .stability-track { flex: 1; height: 8px; background: var(--color-border); border-radius: 4px; overflow: hidden; }
+        .stability-fill { height: 100%; border-radius: 4px; }
+        .stability-fill.high { background: linear-gradient(90deg, #4ade80, #22c55e); }
+        .stability-fill.moderate { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+        .stability-fill.low { background: linear-gradient(90deg, #f87171, #ef4444); }
+        .stability-label { font-size: 0.8rem; font-weight: 500; min-width: 80px; }
+        .stability-value { font-size: 0.8rem; color: var(--color-text-muted); min-width: 70px; text-align: right; }
+
+        .occurrence-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+        .occurrence-card {
+            background: var(--color-table-header);
+            border-radius: var(--radius);
+            padding: 1rem;
+            border-left: 3px solid var(--color-accent);
+        }
+        .occurrence-title { font-weight: 600; margin-bottom: 0.5rem; color: var(--color-primary); }
+        .occurrence-desc { font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 0.75rem; }
+        .occurrence-features { font-size: 0.8rem; color: var(--color-text); }
+        .occurrence-features strong { color: var(--color-accent); }
+
+        .tip-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            margin-top: 1rem;
+            border-left: 4px solid #f59e0b;
+        }
+        .tip-box-title { font-weight: 600; font-size: 0.85rem; color: #92400e; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .tip-box-content { font-size: 0.85rem; color: #78350f; }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            margin-top: 1rem;
+            border-left: 4px solid #ef4444;
+        }
+        .warning-box-title { font-weight: 600; font-size: 0.85rem; color: #991b1b; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .warning-box-content { font-size: 0.85rem; color: #7f1d1d; }
+
+        .series-gradient {
+            background: linear-gradient(to right, #f0f9ff, #dbeafe, #bfdbfe, #93c5fd, #60a5fa, #3b82f6);
+            border-radius: var(--radius);
+            padding: 1rem;
+            margin: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .series-gradient span { background: white; padding: 0.25rem 0.5rem; border-radius: 4px; }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--color-text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--color-border);
+            margin-top: 2rem;
+        }
+        .footer-logo { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; color: var(--color-primary); margin-bottom: 0.25rem; }
+
+        @media print {
+            .nav-tabs, .lang-toggle { display: none; }
+            .tab-content { display: block !important; }
+            .card { box-shadow: none; border: 1px solid var(--color-border); }
+        }
+    </style>
+</head>
+<body class="lang-en">
+    <header class="header">
+        <div class="header-content">
+            <div class="mineral-badge"><span class="en">Framework Grain</span><span class="de">Gerüstkorn</span></div>
+            <h1 class="mineral-name">Plagioclase</h1>
+            <div class="mineral-formula">(Na,Ca)(Si,Al)<sub>4</sub>O<sub>8</sub></div>
+            <div class="header-meta">
+                <div class="meta-item">
+                    <span class="meta-label"><span class="en">Crystal System:</span><span class="de">Kristallsystem:</span></span>
+                    <span><span class="en">Triclinic</span><span class="de">Triklin</span></span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label"><span class="en">Hardness:</span><span class="de">Härte:</span></span>
+                    <span>6–6.5 (Mohs)</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label"><span class="en">Density:</span><span class="de">Dichte:</span></span>
+                    <span>2.62–2.76 g/cm³</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label"><span class="en">Cleavage:</span><span class="de">Spaltbarkeit:</span></span>
+                    <span><span class="en">Perfect {001}, good {010} at ~86°</span><span class="de">Perfekt {001}, gut {010} bei ~86°</span></span>
+                </div>
+            </div>
+        </div>
+        <div class="lang-toggle">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="de">DE</button>
+        </div>
+    </header>
+
+    <main class="main">
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-tab="optical"><span class="en">Optical Properties</span><span class="de">Optische Eigenschaften</span></button>
+            <button class="nav-tab" data-tab="series"><span class="en">Solid Solution Series</span><span class="de">Mischkristallreihe</span></button>
+            <button class="nav-tab" data-tab="stability"><span class="en">Stability & Diagenesis</span><span class="de">Stabilität & Diagenese</span></button>
+            <button class="nav-tab" data-tab="recognition"><span class="en">Recognition</span><span class="de">Erkennung</span></button>
+        </nav>
+
+        <!-- OPTICAL PROPERTIES TAB -->
+        <section class="tab-content active" id="optical">
+            <div class="grid-2">
+                <div class="card">
+                    <h2 class="card-title"><span class="en">Plane-Polarized Light (PPL)</span><span class="de">Linear polarisiertes Licht (PPL)</span></h2>
+                    <div class="optical-section">
+                        <div class="optical-label ppl">PPL</div>
+                        <table class="data-table">
+                            <tr>
+                                <td><span class="en">Relief</span><span class="de">Relief</span></td>
+                                <td><span class="en">Low (n = 1.527–1.577)</span><span class="de">Niedrig (n = 1,527–1,577)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="en">Color</span><span class="de">Farbe</span></td>
+                                <td><span class="en">Colorless; may be cloudy from alteration</span><span class="de">Farblos; kann durch Alteration trüb sein</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="en">Pleochroism</span><span class="de">Pleochroismus</span></td>
+                                <td><span class="en">None</span><span class="de">Keiner</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="en">Cleavage</span><span class="de">Spaltbarkeit</span></td>
+                                <td><span class="en">Two sets at ~86° (slightly oblique)</span><span class="de">Zwei Scharen bei ~86° (leicht schief)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="en">Alteration</span><span class="de">Alteration</span></td>
+                                <td><span class="en">Sericite, saussurite (epidote + albite + calcite)</span><span class="de">Serizit, Saussurit (Epidot + Albit + Calcit)</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="image-placeholder">
+                        <div class="image-placeholder-icon">🔬</div>
+                        <div class="image-placeholder-text"><span class="en">PPL: Plagioclase with saussuritization</span><span class="de">PPL: Plagioklas mit Saussuritisierung</span></div>
+                        <div class="image-placeholder-ref">AAPG Atlas: Plate 7-8</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title"><span class="en">Cross-Polarized Light (XPL)</span><span class="de">Gekreuzt polarisiertes Licht (XPL)</span></h2>
+                    <div class="optical-section xpl">
+                        <div class="optical-label xpl">XPL</div>
+                        <table class="data-table">
+                            <tr>
+                                <td><span class="en">Birefringence</span><span class="de">Doppelbrechung</span></td>
+                                <td><span class="en">Low (δ = 0.007–0.013)</span><span class="de">Niedrig (δ = 0,007–0,013)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="en">Interference Colors</span><span class="de">Interferenzfarben</span></td>
+                                <td><span class="en">1st order gray to white</span><span class="de">1. Ordnung grau bis weiß</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="en">Extinction</span><span class="de">Auslöschung</span></td>
+                                <td><span class="en">Inclined (0–40° depending on composition)</span><span class="de">Schief (0–40° je nach Zusammensetzung)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="en">Twinning</span><span class="de">Verzwillingung</span></td>
+                                <td><span class="en"><strong>Polysynthetic (albite law)</strong> — DIAGNOSTIC</span><span class="de"><strong>Polysynthetisch (Albit-Gesetz)</strong> — DIAGNOSTISCH</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="en">Optical Character</span><span class="de">Optischer Charakter</span></td>
+                                <td><span class="en">Biaxial (+) to (−), varies with composition</span><span class="de">Biaxial (+) bis (−), variiert mit Zusammensetzung</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="image-placeholder">
+                        <div class="image-placeholder-icon">🔬</div>
+                        <div class="image-placeholder-text"><span class="en">XPL: Diagnostic polysynthetic twinning (lamellar pattern)</span><span class="de">XPL: Diagnostische polysynthetische Verzwillingung (lamellares Muster)</span></div>
+                        <div class="image-placeholder-ref">AAPG Atlas: Plate 7-8</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-box-title">
+                    <span>💡</span>
+                    <span><span class="en">Key Recognition Feature</span><span class="de">Wichtiges Erkennungsmerkmal</span></span>
+                </div>
+                <div class="tip-box-content"><span class="en"><strong>Polysynthetic twinning</strong> is the single most diagnostic feature of plagioclase. Look for multiple, closely-spaced, parallel twin lamellae that show alternating extinction. This "zebra stripe" pattern in XPL instantly identifies plagioclase. If no twinning is visible, use staining or consider other criteria.</span><span class="de"><strong>Polysynthetische Verzwillingung</strong> ist das wichtigste diagnostische Merkmal von Plagioklas. Achten Sie auf mehrere, eng beieinander liegende, parallele Zwillingslamellen mit alternierender Auslöschung. Dieses "Zebra-Streifen"-Muster in XPL identifiziert Plagioklas sofort. Wenn keine Verzwillingung sichtbar ist, Färbung verwenden oder andere Kriterien berücksichtigen.</span></div>
+            </div>
+        </section>
+
+        <!-- SOLID SOLUTION SERIES TAB -->
+        <section class="tab-content" id="series">
+            <div class="card">
+                <h2 class="card-title"><span class="en">Plagioclase Solid Solution Series</span><span class="de">Plagioklas-Mischkristallreihe</span></h2>
+                <p style="color: var(--color-text-muted); margin-bottom: 1rem; font-size: 0.9rem;"><span class="en">Continuous solid solution between albite (Ab) and anorthite (An). Composition expressed as An% (anorthite content).</span><span class="de">Kontinuierliche Mischkristallreihe zwischen Albit (Ab) und Anorthit (An). Zusammensetzung ausgedrückt als An% (Anorthit-Gehalt).</span></p>
+
+                <div class="series-gradient">
+                    <span>Ab₁₀₀ (Na)</span>
+                    <span>An₂₀</span>
+                    <span>An₅₀</span>
+                    <span>An₈₀</span>
+                    <span>An₁₀₀ (Ca)</span>
+                </div>
+
+                <div class="occurrence-grid">
+                    <div class="occurrence-card">
+                        <div class="occurrence-title"><span class="en">Albite (An₀₋₁₀)</span><span class="de">Albit (An₀₋₁₀)</span></div>
+                        <div class="occurrence-desc"><span class="en">Na-rich endmember</span><span class="de">Na-reiches Endglied</span></div>
+                        <div class="occurrence-features">
+                            <strong><span class="en">Sources:</span><span class="de">Quellen:</span></strong> <span class="en">Granites, Na-rich volcanic rocks, metamorphics, diagenetic (authigenic)</span><span class="de">Granite, Na-reiche Vulkanite, Metamorphite, diagenetisch (authigen)</span><br>
+                            <strong><span class="en">Extinction:</span><span class="de">Auslöschung:</span></strong> <span class="en">Low angle (0–12°)</span><span class="de">Niedriger Winkel (0–12°)</span>
+                        </div>
+                    </div>
+
+                    <div class="occurrence-card">
+                        <div class="occurrence-title"><span class="en">Oligoclase (An₁₀₋₃₀)</span><span class="de">Oligoklas (An₁₀₋₃₀)</span></div>
+                        <div class="occurrence-desc"><span class="en">Na-dominant intermediate</span><span class="de">Na-dominiertes Intermediär</span></div>
+                        <div class="occurrence-features">
+                            <strong><span class="en">Sources:</span><span class="de">Quellen:</span></strong> <span class="en">Granites, granodiorites, felsic volcanics, gneisses</span><span class="de">Granite, Granodiorite, felsische Vulkanite, Gneise</span><br>
+                            <strong><span class="en">Extinction:</span><span class="de">Auslöschung:</span></strong> <span class="en">12–20°</span><span class="de">12–20°</span>
+                        </div>
+                    </div>
+
+                    <div class="occurrence-card">
+                        <div class="occurrence-title"><span class="en">Andesine (An₃₀₋₅₀)</span><span class="de">Andesin (An₃₀₋₅₀)</span></div>
+                        <div class="occurrence-desc"><span class="en">Intermediate composition</span><span class="de">Intermediäre Zusammensetzung</span></div>
+                        <div class="occurrence-features">
+                            <strong><span class="en">Sources:</span><span class="de">Quellen:</span></strong> <span class="en">Andesites, diorites, intermediate volcanics</span><span class="de">Andesite, Diorite, intermediäre Vulkanite</span><br>
+                            <strong><span class="en">Extinction:</span><span class="de">Auslöschung:</span></strong> <span class="en">20–30°</span><span class="de">20–30°</span>
+                        </div>
+                    </div>
+
+                    <div class="occurrence-card">
+                        <div class="occurrence-title"><span class="en">Labradorite (An₅₀₋₇₀)</span><span class="de">Labradorit (An₅₀₋₇₀)</span></div>
+                        <div class="occurrence-desc"><span class="en">Ca-dominant intermediate</span><span class="de">Ca-dominiertes Intermediär</span></div>
+                        <div class="occurrence-features">
+                            <strong><span class="en">Sources:</span><span class="de">Quellen:</span></strong> <span class="en">Basalts, gabbros, anorthosites</span><span class="de">Basalte, Gabbros, Anorthosite</span><br>
+                            <strong><span class="en">Extinction:</span><span class="de">Auslöschung:</span></strong> <span class="en">30–40°</span><span class="de">30–40°</span>
+                        </div>
+                    </div>
+
+                    <div class="occurrence-card">
+                        <div class="occurrence-title"><span class="en">Bytownite (An₇₀₋₉₀)</span><span class="de">Bytownit (An₇₀₋₉₀)</span></div>
+                        <div class="occurrence-desc"><span class="en">Ca-rich</span><span class="de">Ca-reich</span></div>
+                        <div class="occurrence-features">
+                            <strong><span class="en">Sources:</span><span class="de">Quellen:</span></strong> <span class="en">Gabbros, norites, mafic cumulates</span><span class="de">Gabbros, Norite, mafische Kumulate</span><br>
+                            <strong><span class="en">Extinction:</span><span class="de">Auslöschung:</span></strong> <span class="en">35–40°</span><span class="de">35–40°</span>
+                        </div>
+                    </div>
+
+                    <div class="occurrence-card">
+                        <div class="occurrence-title"><span class="en">Anorthite (An₉₀₋₁₀₀)</span><span class="de">Anorthit (An₉₀₋₁₀₀)</span></div>
+                        <div class="occurrence-desc"><span class="en">Ca-rich endmember</span><span class="de">Ca-reiches Endglied</span></div>
+                        <div class="occurrence-features">
+                            <strong><span class="en">Sources:</span><span class="de">Quellen:</span></strong> <span class="en">Anorthosites, lunar rocks, high-grade metamorphics</span><span class="de">Anorthosite, Mondgesteine, hochgradige Metamorphite</span><br>
+                            <strong><span class="en">Note:</span><span class="de">Hinweis:</span></strong> <span class="en">Rare in sandstones (unstable)</span><span class="de">Selten in Sandsteinen (instabil)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <div class="tip-box-title">
+                        <span>💡</span>
+                        <span><span class="en">Provenance Significance</span><span class="de">Provenance-Bedeutung</span></span>
+                    </div>
+                    <div class="tip-box-content"><span class="en">Plagioclase composition reflects source rock type: <strong>Albite-oligoclase (An₀₋₃₀)</strong> = felsic/granitic sources; <strong>Andesine (An₃₀₋₅₀)</strong> = intermediate/volcanic arc; <strong>Labradorite-anorthite (An₅₀₋₁₀₀)</strong> = mafic/basic sources. Ca-rich plagioclase is more susceptible to weathering and diagenesis, so its presence indicates proximity to source or rapid burial.</span><span class="de">Plagioklas-Zusammensetzung spiegelt den Ausgangsgesteinstyp wider: <strong>Albit-Oligoklas (An₀₋₃₀)</strong> = felsische/granitische Quellen; <strong>Andesin (An₃₀₋₅₀)</strong> = intermediär/vulkanischer Bogen; <strong>Labradorit-Anorthit (An₅₀₋₁₀₀)</strong> = mafische/basische Quellen. Ca-reicher Plagioklas ist anfälliger für Verwitterung und Diagenese; seine Anwesenheit zeigt Nähe zur Quelle oder schnelle Versenkung an.</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STABILITY & DIAGENESIS TAB -->
+        <section class="tab-content" id="stability">
+            <div class="grid-2">
+                <div class="card">
+                    <h2 class="card-title"><span class="en">Weathering Resistance</span><span class="de">Verwitterungsresistenz</span></h2>
+
+                    <div class="stability-bar">
+                        <span class="stability-label"><span class="en">Chemical</span><span class="de">Chemisch</span></span>
+                        <div class="stability-track">
+                            <div class="stability-fill low" style="width: 35%;"></div>
+                        </div>
+                        <span class="stability-value"><span class="en">Low</span><span class="de">Niedrig</span></span>
+                    </div>
+
+                    <div class="stability-bar">
+                        <span class="stability-label"><span class="en">Mechanical</span><span class="de">Mechanisch</span></span>
+                        <div class="stability-track">
+                            <div class="stability-fill moderate" style="width: 50%;"></div>
+                        </div>
+                        <span class="stability-value"><span class="en">Moderate</span><span class="de">Mäßig</span></span>
+                    </div>
+
+                    <table class="data-table" style="margin-top: 1rem;">
+                        <tr>
+                            <th colspan="2"><span class="en">Weathering Behavior</span><span class="de">Verwitterungsverhalten</span></th>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Goldich Stability</span><span class="de">Goldich-Stabilität</span></td>
+                            <td><span class="en">Less stable than K-feldspar (Ca-rich even less)</span><span class="de">Weniger stabil als K-Feldspat (Ca-reich noch weniger)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Weathering Products</span><span class="de">Verwitterungsprodukte</span></td>
+                            <td><span class="en">Kaolinite, montmorillonite, dissolved Ca²⁺/Na⁺</span><span class="de">Kaolinit, Montmorillonit, gelöstes Ca²⁺/Na⁺</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Composition Effect</span><span class="de">Zusammensetzungseffekt</span></td>
+                            <td><span class="en">Ca-rich > Na-rich weathering susceptibility</span><span class="de">Ca-reich > Na-reich Verwitterungsanfälligkeit</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Climate Sensitivity</span><span class="de">Klimasensitivität</span></td>
+                            <td><span class="en">Strongly depleted in humid tropical settings</span><span class="de">Stark verarmt in humid-tropischen Gebieten</span></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title"><span class="en">Diagenetic Behavior</span><span class="de">Diagenetisches Verhalten</span></h2>
+
+                    <div class="stability-bar">
+                        <span class="stability-label"><span class="en">Dissolution</span><span class="de">Lösung</span></span>
+                        <div class="stability-track">
+                            <div class="stability-fill low" style="width: 25%;"></div>
+                        </div>
+                        <span class="stability-value"><span class="en">Very Susceptible</span><span class="de">Sehr anfällig</span></span>
+                    </div>
+
+                    <div class="stability-bar">
+                        <span class="stability-label"><span class="en">Replacement</span><span class="de">Ersetzung</span></span>
+                        <div class="stability-track">
+                            <div class="stability-fill low" style="width: 25%;"></div>
+                        </div>
+                        <span class="stability-value"><span class="en">Very Common</span><span class="de">Sehr häufig</span></span>
+                    </div>
+
+                    <div class="stability-bar">
+                        <span class="stability-label"><span class="en">Compaction</span><span class="de">Kompaktion</span></span>
+                        <div class="stability-track">
+                            <div class="stability-fill high" style="width: 75%;"></div>
+                        </div>
+                        <span class="stability-value"><span class="en">Rigid</span><span class="de">Starr</span></span>
+                    </div>
+
+                    <table class="data-table" style="margin-top: 1rem;">
+                        <tr>
+                            <th colspan="2"><span class="en">Diagenetic Features</span><span class="de">Diagenetische Merkmale</span></th>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Albitization</span><span class="de">Albitisierung</span></td>
+                            <td><span class="en">Ca-plagioclase → albite (very common)</span><span class="de">Ca-Plagioklas → Albit (sehr häufig)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Saussuritization</span><span class="de">Saussuritisierung</span></td>
+                            <td><span class="en">Epidote + albite + sericite + calcite</span><span class="de">Epidot + Albit + Serizit + Calcit</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Dissolution</span><span class="de">Lösung</span></td>
+                            <td><span class="en">Secondary porosity (especially Ca-rich)</span><span class="de">Sekundäre Porosität (besonders Ca-reich)</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <div class="warning-box-title">
+                    <span>⚠️</span>
+                    <span><span class="en">Critical Diagenetic Bias</span><span class="de">Kritische diagenetische Verzerrung</span></span>
+                </div>
+                <div class="warning-box-content"><span class="en">Plagioclase is the most labile common framework grain. In deeply buried or old sandstones, original plagioclase content is routinely underestimated due to: (1) Complete dissolution creating secondary porosity; (2) Albitization erasing Ca-rich compositions; (3) Replacement by clays and calcite. The P/F ratio systematically decreases with burial depth and stratigraphic age. This is a major diagenetic bias affecting provenance interpretation (cf. Caracciolo 2020).</span><span class="de">Plagioklas ist das labilste häufige Gerüstkorn. In tief versenkten oder alten Sandsteinen wird der ursprüngliche Plagioklas-Gehalt routinemäßig unterschätzt durch: (1) Vollständige Lösung, die Sekundärporosität erzeugt; (2) Albitisierung, die Ca-reiche Zusammensetzungen auslöscht; (3) Ersetzung durch Tone und Calcit. Das P/F-Verhältnis nimmt systematisch mit Versenkungstiefe und stratigraphischem Alter ab. Dies ist eine bedeutende diagenetische Verzerrung, die die Provenance-Interpretation beeinflusst (vgl. Caracciolo 2020).</span></div>
+            </div>
+        </section>
+
+        <!-- RECOGNITION TAB -->
+        <section class="tab-content" id="recognition">
+            <div class="card">
+                <h2 class="card-title"><span class="en">Quick Identification Key</span><span class="de">Schnellbestimmungsschlüssel</span></h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th><span class="en">Feature</span><span class="de">Merkmal</span></th>
+                            <th><span class="en">Plagioclase</span><span class="de">Plagioklas</span></th>
+                            <th><span class="en">K-Feldspar</span><span class="de">K-Feldspat</span></th>
+                            <th><span class="en">Quartz</span><span class="de">Quarz</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="en">Twinning</span><span class="de">Verzwillingung</span></td>
+                            <td><strong><span class="en">Polysynthetic lamellae</span><span class="de">Polysynthetische Lamellen</span></strong></td>
+                            <td><span class="en">Carlsbad (simple) or tartan</span><span class="de">Karlsbader (einfach) oder Tartan</span></td>
+                            <td><span class="en">None visible</span><span class="de">Keine sichtbar</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Cleavage Angle</span><span class="de">Spaltwinkel</span></td>
+                            <td><span class="en">~86° (slightly oblique)</span><span class="de">~86° (leicht schief)</span></td>
+                            <td><span class="en">~90°</span><span class="de">~90°</span></td>
+                            <td><span class="en">None</span><span class="de">Keine</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Staining</span><span class="de">Färbung</span></td>
+                            <td><span class="en">Red (amaranth) for Ca-plag; unstained for albite</span><span class="de">Rot (Amaranth) für Ca-Plag; ungefärbt für Albit</span></td>
+                            <td><span class="en">Yellow (Na-cobaltinitrite)</span><span class="de">Gelb (Na-Kobaltinitrit)</span></td>
+                            <td><span class="en">Unstained</span><span class="de">Ungefärbt</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Alteration Style</span><span class="de">Alterationsstil</span></td>
+                            <td><span class="en">Saussurite (epidote + calcite patches)</span><span class="de">Saussurit (Epidot + Calcit-Flecken)</span></td>
+                            <td><span class="en">Sericite (dusty, diffuse)</span><span class="de">Serizit (staubig, diffus)</span></td>
+                            <td><span class="en">Fresh</span><span class="de">Frisch</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title"><span class="en">Common Mistakes to Avoid</span><span class="de">Häufige Fehler vermeiden</span></h2>
+                <div class="grid-2">
+                    <div>
+                        <ul style="margin-left: 1.25rem; color: var(--color-text-muted); font-size: 0.9rem;">
+                            <li><span class="en"><strong>Untwinned plagioclase:</strong> Not all plagioclase shows twinning! Many volcanic plagioclase phenocrysts and altered grains lack visible twins. Use staining.</span><span class="de"><strong>Unverzwillingter Plagioklas:</strong> Nicht jeder Plagioklas zeigt Verzwillingung! Viele vulkanische Plagioklas-Phänokristalle und alterierte Körner haben keine sichtbaren Zwillinge. Färbung verwenden.</span></li>
+                            <li><span class="en"><strong>Perthite confusion:</strong> Albite exsolution lamellae in K-feldspar can mimic polysynthetic twins — but perthite lamellae are irregular, not parallel.</span><span class="de"><strong>Perthit-Verwechslung:</strong> Albit-Entmischungslamellen in K-Feldspat können polysynthetische Zwillinge imitieren — aber Perthit-Lamellen sind unregelmäßig, nicht parallel.</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul style="margin-left: 1.25rem; color: var(--color-text-muted); font-size: 0.9rem;">
+                            <li><span class="en"><strong>Albitized grains:</strong> Diagenetic albite replacing K-feldspar or Ca-plagioclase may not show original twinning. Context and texture are important.</span><span class="de"><strong>Albitisierte Körner:</strong> Diagenetischer Albit, der K-Feldspat oder Ca-Plagioklas ersetzt, zeigt möglicherweise keine ursprüngliche Verzwillingung. Kontext und Textur sind wichtig.</span></li>
+                            <li><span class="en"><strong>Zoning:</strong> Compositional zoning (concentric) in plagioclase indicates igneous origin — don't confuse with twinning.</span><span class="de"><strong>Zonierung:</strong> Zusammensetzungszonierung (konzentrisch) in Plagioklas zeigt magmatische Herkunft an — nicht mit Verzwillingung verwechseln.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-box-title">
+                    <span>🎯</span>
+                    <span><span class="en">Best Practice</span><span class="de">Beste Praxis</span></span>
+                </div>
+                <div class="tip-box-content"><span class="en">For plagioclase identification: (1) First look for polysynthetic twinning — if present, it's plagioclase; (2) If no twinning, check staining; (3) Look for saussurite alteration (green epidote patches) which is characteristic of Ca-plagioclase; (4) In volcanic rock fragments, euhedral lath-shaped grains are typically plagioclase phenocrysts; (5) Always report the proportion of twinned vs. untwinned feldspars in your point count data.</span><span class="de">Für Plagioklas-Identifikation: (1) Zuerst nach polysynthetischer Verzwillingung suchen — wenn vorhanden, ist es Plagioklas; (2) Wenn keine Verzwillingung, Färbung prüfen; (3) Nach Saussurit-Alteration (grüne Epidot-Flecken) suchen, die charakteristisch für Ca-Plagioklas ist; (4) In vulkanischen Gesteinsbruchstücken sind idiomorphe leistenförmige Körner typischerweise Plagioklas-Phänokristalle; (5) Immer den Anteil von verzwillingten vs. unverzwillingten Feldspäten in den Punktzähldaten dokumentieren.</span></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-logo">GeoZentrum Nordbayern</div>
+        <div>Friedrich-Alexander-Universität Erlangen-Nürnberg</div>
+        <div style="margin-top: 0.5rem;"><span class="en">Sandstone Petrography Course Materials</span><span class="de">Sandstein-Petrographie Kursmaterialien</span></div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.nav-tab').forEach(function(tab) {
+            tab.onclick = function() {
+                document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
+                document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
+                this.classList.add('active');
+                document.getElementById(this.getAttribute('data-tab')).classList.add('active');
+            };
+        });
+
+        document.querySelectorAll('.lang-btn').forEach(function(btn) {
+            btn.onclick = function() {
+                var lang = this.getAttribute('data-lang');
+                document.body.classList.remove('lang-en', 'lang-de');
+                document.body.classList.add('lang-' + lang);
+                document.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.remove('active'); });
+                this.classList.add('active');
+            };
+        });
+    </script>
+</body>
+</html>

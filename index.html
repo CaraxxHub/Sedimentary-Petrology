@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mineral Data Sheets | Sandstone Petrography</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #2c3e50;
+            --color-accent: #8b5a2b;
+            --color-bg: #faf9f7;
+            --color-card: #ffffff;
+            --color-text: #2c3e50;
+            --color-text-muted: #6b7280;
+            --color-border: #e5e2dc;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.1);
+            --radius: 12px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Source Sans 3', sans-serif; 
+            background: var(--color-bg); 
+            color: var(--color-text); 
+            line-height: 1.6; 
+            font-size: 16px;
+        }
+        
+        /* Language toggle */
+        .en { display: inline; } .de { display: none; }
+        body.lang-de .en { display: none !important; } 
+        body.lang-de .de { display: inline !important; }
+        body.lang-en .en { display: inline !important; } 
+        body.lang-en .de { display: none !important; }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #5d4037 0%, #3e2723 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+        .header-bg {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        .header-content {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .header-subtitle {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        .header-meta {
+            font-size: 0.9rem;
+            opacity: 0.75;
+        }
+        .lang-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .lang-btn:hover { background: rgba(255,255,255,0.1); }
+        .lang-btn.active { background: var(--color-accent); }
+        
+        /* Main content */
+        .main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+        }
+        
+        /* Section */
+        .section {
+            margin-bottom: 2.5rem;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .section-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        
+        /* Mineral grid */
+        .mineral-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+        
+        /* Mineral card */
+        .mineral-card {
+            background: var(--color-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .mineral-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .card-header {
+            padding: 1.25rem 1.25rem 1rem;
+            color: white;
+            position: relative;
+        }
+        .card-formula {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            opacity: 0.85;
+            margin-bottom: 0.25rem;
+        }
+        .card-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+        }
+        .card-body {
+            padding: 1rem 1.25rem 1.25rem;
+        }
+        .card-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .feature-tag {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            background: var(--color-bg);
+            border-radius: 4px;
+            color: var(--color-text-muted);
+            font-weight: 500;
+        }
+        .card-key {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+        
+        /* Color themes for different mineral groups */
+        .theme-framework { background: linear-gradient(135deg, #78909c 0%, #455a64 100%); }
+        .theme-feldspar-k { background: linear-gradient(135deg, #ffb74d 0%, #f57c00 100%); }
+        .theme-feldspar-p { background: linear-gradient(135deg, #64b5f6 0%, #1976d2 100%); }
+        .theme-mica-bt { background: linear-gradient(135deg, #8d6e63 0%, #5d4037 100%); }
+        .theme-mica-ms { background: linear-gradient(135deg, #bdbdbd 0%, #757575 100%); }
+        .theme-chlorite { background: linear-gradient(135deg, #4caf50 0%, #1b5e20 100%); }
+        .theme-ztr-zr { background: linear-gradient(135deg, #9c27b0 0%, #4a148c 100%); }
+        .theme-ztr-tm { background: linear-gradient(135deg, #009688 0%, #004d40 100%); }
+        .theme-ztr-rt { background: linear-gradient(135deg, #ff5722 0%, #bf360c 100%); }
+        .theme-apatite { background: linear-gradient(135deg, #03a9f4 0%, #01579b 100%); }
+        .theme-epidote { background: linear-gradient(135deg, #cddc39 0%, #558b2f 100%); }
+        .theme-pyroxene { background: linear-gradient(135deg, #607d8b 0%, #263238 100%); }
+        .theme-amphibole { background: linear-gradient(135deg, #388e3c 0%, #1b5e20 100%); }
+        
+        /* Info box */
+        .info-box {
+            background: var(--color-card);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--color-accent);
+        }
+        .info-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-primary);
+        }
+        .info-box p {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--color-text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--color-border);
+            margin-top: 2rem;
+        }
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            color: var(--color-primary);
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        .footer a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        .footer a:hover { text-decoration: underline; }
+        
+        @media (max-width: 600px) {
+            .header h1 { font-size: 2rem; }
+            .mineral-grid { grid-template-columns: 1fr; }
+            .lang-toggle { position: static; margin-top: 1rem; justify-content: center; }
+        }
+    </style>
+</head>
+<body class="lang-en">
+    <header class="header">
+        <div class="header-bg"></div>
+        <div class="header-content">
+            <h1><span class="en">Mineral Data Sheets</span><span class="de">Mineral-Datenblätter</span></h1>
+            <p class="header-subtitle">
+                <span class="en">Optical Microscopy Reference for Sandstone Petrography</span>
+                <span class="de">Optische Mikroskopie-Referenz für Sandstein-Petrographie</span>
+            </p>
+            <p class="header-meta">
+                <span class="en">GeoZentrum Nordbayern · FAU Erlangen-Nürnberg</span>
+                <span class="de">GeoZentrum Nordbayern · FAU Erlangen-Nürnberg</span>
+            </p>
+        </div>
+        <div class="lang-toggle">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="de">DE</button>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="info-box">
+            <h3><span class="en">How to Use</span><span class="de">Anleitung</span></h3>
+            <p>
+                <span class="en">Click on any mineral card to open its data sheet. Each sheet includes optical properties (PPL/XPL), occurrence & provenance significance, weathering stability & diagenetic behavior, and recognition tips. All sheets are bilingual — use the EN/DE toggle in the top right corner.</span>
+                <span class="de">Klicken Sie auf eine Mineralkarte, um das Datenblatt zu öffnen. Jedes Blatt enthält optische Eigenschaften (PPL/XPL), Vorkommen & Provenance-Bedeutung, Verwitterungsstabilität & diagenetisches Verhalten und Erkennungstipps. Alle Blätter sind zweisprachig — nutzen Sie den EN/DE-Schalter oben rechts.</span>
+            </p>
+        </div>
+
+        <!-- Framework Grains -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-icon" style="background: #78909c;">🔷</span>
+                <span class="en">Framework Grains (QFL)</span><span class="de">Gerüstkörner (QFL)</span>
+            </h2>
+            <div class="mineral-grid">
+                <a href="quartz-datasheet.html" class="mineral-card">
+                    <div class="card-header theme-framework">
+                        <div class="card-formula">SiO₂</div>
+                        <div class="card-name">Quartz</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-features">
+                            <span class="feature-tag"><span class="en">Low birefringence</span><span class="de">Niedrige Doppelbrechung</span></span>
+                            <span class="feature-tag"><span class="en">No cleavage</span><span class="de">Keine Spaltbarkeit</span></span>
+                        </div>
+                        <p class="card-key"><span class="en">Most stable framework grain. Qm vs Qp distinction important for provenance.</span><span class="de">Stabilstes Gerüstkorn. Qm vs Qp Unterscheidung wichtig für Provenance.</span></p>
+                    </div>
+                </a>
+                
+                <a href="kfeldspar-datasheet.html" class="mineral-card">
+                    <div class="card-header theme-feldspar-k">
+                        <div class="card-formula">KAlSi₃O₈</div>
+                        <div class="card-name">K-Feldspar</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-features">
+                            <span class="feature-tag"><span class="en">Tartan twinning</span><span class="de">Tartan-Verzwillingung</span></span>
+                            <span class="feature-tag"><span class="en">Carlsbad twins</span><span class="de">Karlsbader Zwillinge</span></span>
+                        </div>
+                        <p class="card-key"><span class="en">Orthoclase, microcline, sanidine. Tartan pattern diagnostic for microcline.</span><span class="de">Orthoklas, Mikroklin, Sanidin. Tartan-Muster diagnostisch für Mikroklin.</span></p>
+                    </div>
+                </a>
+                
+                <a href="plagioclase-datasheet.html" class="mineral-card">
+                    <div class="card-header theme-feldspar-p">
+                        <div class="card-formula">NaAlSi₃O₈ – CaAl₂Si₂O₈</div>
+                        <div class="card-name">Plagioclase</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-features">
+                            <span class="feature-tag"><span class="en">Polysynthetic twins</span><span class="de">Polysynthetische Zwillinge</span></span>
+                            <span class="feature-tag"><span class="en">"Zebra stripes"</span><span class="de">"Zebrastreifen"</span></span>
+                        </div>
+                        <p class="card-key"><span class="en">Albite to anorthite series. P/F ratio decreases with burial (Caracciolo 2020).</span><span class="de">Albit bis Anorthit Serie. P/F Verhältnis nimmt mit Versenkung ab (Caracciolo 2020).</span></p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Phyllosilicates -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-icon" style="background: #8d6e63;">📄</span>
+                <span class="en">Phyllosilicates (Micas & Chlorite)</span><span class="de">Phyllosilikate (Glimmer & Chlorit)</span>
+            </h2>
+            <div class="mineral-grid">
+                <a href="biotite-datasheet.html" class="mineral-card">
+                    <div class="card-header theme-mica-bt">
+                        <div class="card-formula">K(Mg,Fe)₃AlSi₃O₁₀(OH)₂</div>
+                        <div class="card-name">Biotite</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-features">
+                            <span class="feature-tag"><span class="en">Brown color</span><span class="de">Braune Farbe</span></span>
+                            <span class="feature-tag"><span class="en">Strong pleochroism</span><span class="de">Starker Pleochroismus</span></span>
+                        </div>
+                        <p class="card-key"><span class="en">Brown ↔ yellow pleochroism diagnostic. "Birds-eye" extinction. Chloritizes during diagenesis.</span><span class="de">Braun ↔ gelb Pleochroismus diagnostisch. "Vogelaugen"-Auslöschung. Chloritisiert während Diagenese.</span></p>
+                    </div>
+                </a>
+                
+                <a href="muscovite-datasheet.html" class="mineral-card">
+                    <div class="card-header theme-mica-ms">
+                        <div class="card-formula">KAl₂(AlSi₃O₁₀)(OH)₂</div>
+                        <div class="card-name">Muscovite</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-features">
+                            <span class="feature-tag"><span class="en">Colorless</span><span class="de">Farblos</span></span>
+                            <span class="feature-tag"><span class="en">Bright XPL colors</span><span class="de">Helle XPL Farben</span></span>
+                        </div>
+                        <p class="card-key"><span class="en">Colorless in PPL distinguishes from biotite. Don't confuse sericite with detrital muscovite!</span><span class="de">Farblos in PPL unterscheidet von Biotit. Serizit nicht mit detritischem Muskovit verwechseln!</span></p>
+                    </div>
+                </a>
+                
+                <a href="chlorite-datasheet.html" class="mineral-card">
+                    <div class="card-header theme-chlorite">
+                        <div class="card-formula">(Mg,Fe,Al)₆(Si,Al)₄O₁₀(OH)₈</div>
+                        <div class="card-name">Chlorite</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-features">
+                            <span class="feature-tag"><span class="en">Green PPL</span><span class="de">Grün PPL</span></span>
+                            <span class="feature-tag"><span class="en">Anomalous blue XPL</span><span class="de">Anomal blau XPL</span></span>
+                        </div>
+                        <p class="card-key"><span class="en">"Berlin blue" interference colors diagnostic. Can be detrital OR authigenic — distinguish!</span><span class="de">"Berliner Blau" Interferenzfarben diagnostisch. Kann detritisch ODER authigen sein — unterscheiden!</span></p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ZTR Suite -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-icon" style="background: #9c27b0;">💎</span>
+                <span class="en">ZTR Suite (Ultra-Stable Heavy Minerals)</span><span class="de">ZTR-Suite (Ultra-stabile Schwerminerale)</span>
+            </h2>
+            <div class="mineral-grid">
+                <a href="zircon-datasheet.html" class="mineral-card">
+                    <div class="card-header theme-ztr-zr">
+                        <div class="card-formula">ZrSiO₄</div>
+                        <div class="card-name">Zircon</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-features">
+                            <span class="feature-tag"><span class="en">Very high relief</span><span class="de">Sehr hohes Relief</span></span>
+                            <span class="feature-tag"><span class="en">U-Pb dating</span><span class="de">U-Pb Datierung</span></span>
+                        </div>
+                        <p class="card-key"><span class="en">Premier geochronology mineral. Prismatic + pyramidal habit. Morphology indicates recycling.</span><span class="de">Wichtigstes Geochronologie-Mineral. Prismatisch + pyramidaler Habitus. Morphologie zeigt Recycling.</span></p>
+                    </div>
+                </a>
+                
+                <a href="tourmaline-datasheet.html" class="mineral-card">
+                    <div class="card-header theme-ztr-tm">
+                        <div class="card-formula">(Na,Ca)(Mg,Fe,Li,Al)₃Al₆(BO₃)₃Si₆O₁₈(OH)₄</div>
+                        <div class="card-name">Tourmaline</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-features">
+                            <span class="feature-tag"><span class="en">Triangular section</span><span class="de">Dreieckiger Schnitt</span></span>
+                            <span class="feature-tag"><span class="en">No cleavage</span><span class="de">Keine Spaltbarkeit</span></span>
+                        </div>
+                        <p class="card-key"><span class="en">Rounded triangular cross-section nearly unique. Color (schorl/dravite) indicates source type.</span><span class="de">Gerundeter dreieckiger Querschnitt fast einzigartig. Farbe (Schörl/Dravit) zeigt Quellentyp.</span></p>
+                    </div>
+                </a>
+                
+                <a href="rutile-datasheet.html" class="mineral-card">
+                    <div class="card-header theme-ztr-rt">
+                        <div class="card-formula">TiO₂</div>
+                        <div class="card-name">Rutile</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-features">
+                            <span class="feature-tag"><span class="en">Extreme relief</span><span class="de">Extremes Relief</span></span>
+                            <span class="feature-tag"><span class="en">Red-brown color</span><span class="de">Rot-braune Farbe</span></span>
+                        </div>
+                        <p class="card-key"><span class="en">Highest RI of common minerals! Deep red-brown. Geniculate twins diagnostic.</span><span class="de">Höchster Brechungsindex häufiger Minerale! Tief rot-braun. Geniculat-Zwillinge diagnostisch.</span></p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Other Accessory Minerals -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-icon" style="background: #03a9f4;">✨</span>
+                <span class="en">Other Accessory Minerals</span><span class="de">Weitere akzessorische Minerale</span>
+            </h2>
+            <div class="mineral-grid">
+                <a href="apatite-datasheet.html" class="mineral-card">
+                    <div class="card-header theme-apatite">
+                        <div class="card-formula">Ca₅(PO₄)₃(F,Cl,OH)</div>
+                        <div class="card-name">Apatite</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-features">
+                            <span class="feature-tag"><span class="en">Hexagonal habit</span><span class="de">Hexagonaler Habitus</span></span>
+                            <span class="feature-tag"><span class="en">Very low δ</span><span class="de">Sehr niedriges δ</span></span>
+                        </div>
+                        <p class="card-key"><span class="en">Fission-track & (U-Th)/He dating for exhumation history. Moderately stable.</span><span class="de">Spaltspuren- & (U-Th)/He-Datierung für Exhumationsgeschichte. Mäßig stabil.</span></p>
+                    </div>
+                </a>
+                
+                <a href="epidote-datasheet.html" class="mineral-card">
+                    <div class="card-header theme-epidote">
+                        <div class="card-formula">Ca₂(Al,Fe)₃(SiO₄)₃(OH)</div>
+                        <div class="card-name">Epidote</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-features">
+                            <span class="feature-tag"><span class="en">"Pistachio green"</span><span class="de">"Pistaziengrün"</span></span>
+                            <span class="feature-tag"><span class="en">High relief</span><span class="de">Hohes Relief</span></span>
+                        </div>
+                        <p class="card-key"><span class="en">Yellow-green color diagnostic. Indicates greenschist facies or hydrothermal sources.</span><span class="de">Gelb-grüne Farbe diagnostisch. Zeigt Grünschiefer-Fazies oder hydrothermale Quellen an.</span></p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Ferromagnesian Silicates -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="section-icon" style="background: #607d8b;">⛓️</span>
+                <span class="en">Ferromagnesian Chain Silicates</span><span class="de">Ferromagnesische Kettensilikate</span>
+            </h2>
+            <div class="mineral-grid">
+                <a href="pyroxene-datasheet.html" class="mineral-card">
+                    <div class="card-header theme-pyroxene">
+                        <div class="card-formula">(Ca,Na)(Mg,Fe,Al)(Si,Al)₂O₆</div>
+                        <div class="card-name"><span class="en">Pyroxene (Augite)</span><span class="de">Pyroxen (Augit)</span></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-features">
+                            <span class="feature-tag"><span class="en">~90° cleavage</span><span class="de">~90° Spaltbarkeit</span></span>
+                            <span class="feature-tag"><span class="en">8-sided section</span><span class="de">8-seitiger Schnitt</span></span>
+                        </div>
+                        <p class="card-key"><span class="en">Cleavage ~90° distinguishes from amphibole (~60°). Very unstable — indicates mafic/volcanic source.</span><span class="de">Spaltbarkeit ~90° unterscheidet von Amphibol (~60°). Sehr instabil — zeigt mafische/vulkanische Quelle.</span></p>
+                    </div>
+                </a>
+                
+                <a href="amphibole-datasheet.html" class="mineral-card">
+                    <div class="card-header theme-amphibole">
+                        <div class="card-formula">(Ca,Na)₂(Mg,Fe,Al)₅(Si,Al)₈O₂₂(OH)₂</div>
+                        <div class="card-name"><span class="en">Amphibole (Hornblende)</span><span class="de">Amphibol (Hornblende)</span></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-features">
+                            <span class="feature-tag"><span class="en">56°/124° cleavage</span><span class="de">56°/124° Spaltbarkeit</span></span>
+                            <span class="feature-tag"><span class="en">Green-brown pleochroism</span><span class="de">Grün-braun Pleochroismus</span></span>
+                        </div>
+                        <p class="card-key"><span class="en">Diamond-shaped section with 56°/124° cleavage diagnostic. Stronger pleochroism than pyroxene.</span><span class="de">Rautenförmiger Schnitt mit 56°/124° Spaltbarkeit diagnostisch. Stärkerer Pleochroismus als Pyroxen.</span></p>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-logo">GeoZentrum Nordbayern</div>
+        <div>Friedrich-Alexander-Universität Erlangen-Nürnberg</div>
+        <div style="margin-top: 0.5rem;">
+            <span class="en">Sandstone Petrography Course Materials</span>
+            <span class="de">Sandstein-Petrographie Kursmaterialien</span>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.lang-btn').forEach(function(btn) {
+            btn.onclick = function() {
+                var lang = this.getAttribute('data-lang');
+                document.body.classList.remove('lang-en', 'lang-de');
+                document.body.classList.add('lang-' + lang);
+                document.querySelectorAll('.lang-btn').forEach(function(b) {
+                    b.classList.remove('active');
+                });
+                this.classList.add('active');
+                // Store preference
+                localStorage.setItem('mineral-sheets-lang', lang);
+            };
+        });
+        // Load saved preference
+        var savedLang = localStorage.getItem('mineral-sheets-lang');
+        if (savedLang) {
+            document.body.classList.remove('lang-en', 'lang-de');
+            document.body.classList.add('lang-' + savedLang);
+            document.querySelectorAll('.lang-btn').forEach(function(b) {
+                b.classList.toggle('active', b.getAttribute('data-lang') === savedLang);
+            });
+        }
+    </script>
+</body>
+</html>

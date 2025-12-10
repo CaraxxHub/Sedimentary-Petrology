@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biotite | Mineral Data Sheet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #2c3e50;
+            --color-accent: #5d4037;
+            --color-bg: #faf9f7;
+            --color-card: #ffffff;
+            --color-text: #2c3e50;
+            --color-text-muted: #6b7280;
+            --color-border: #e5e2dc;
+            --color-table-header: #f5f3ef;
+            --color-ppl: #e8d4a8;
+            --color-xpl: #a8c8e8;
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -1px rgba(0,0,0,0.04);
+            --radius: 8px;
+            --transition: 0.2s ease;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Source Sans 3', sans-serif; background: var(--color-bg); color: var(--color-text); line-height: 1.6; font-size: 15px; }
+        .en { display: inline; } .de { display: none; }
+        body.lang-de .en { display: none !important; } body.lang-de .de { display: inline !important; }
+        body.lang-en .en { display: inline !important; } body.lang-en .de { display: none !important; }
+
+        .header { background: linear-gradient(135deg, #4a3728 0%, #2d1f16 100%); color: white; padding: 2rem; position: relative; }
+        .header-content { max-width: 1200px; margin: 0 auto; }
+        .mineral-badge { display: inline-block; background: var(--color-accent); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.75rem; }
+        .mineral-name { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .mineral-formula { font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; opacity: 0.9; margin-bottom: 1rem; }
+        .header-meta { display: flex; gap: 2rem; flex-wrap: wrap; font-size: 0.9rem; opacity: 0.85; }
+        .meta-item { display: flex; align-items: center; gap: 0.5rem; }
+        .meta-label { opacity: 0.7; }
+
+        .lang-toggle { position: absolute; top: 2rem; right: 2rem; display: flex; background: rgba(255,255,255,0.1); border-radius: 6px; overflow: hidden; }
+        .lang-btn { padding: 0.5rem 1rem; border: none; background: transparent; color: white; cursor: pointer; font-family: inherit; font-size: 0.85rem; font-weight: 500; }
+        .lang-btn.active { background: var(--color-accent); }
+
+        .main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .nav-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--color-border); }
+        .nav-tab { padding: 0.75rem 1.25rem; border: none; background: transparent; color: var(--color-text-muted); cursor: pointer; font-family: inherit; font-size: 0.9rem; font-weight: 500; border-bottom: 2px solid transparent; margin-bottom: -2px; }
+        .nav-tab:hover { color: var(--color-text); }
+        .nav-tab.active { color: var(--color-accent); border-bottom-color: var(--color-accent); }
+
+        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .card { background: var(--color-card); border-radius: var(--radius); box-shadow: var(--shadow-md); padding: 1.5rem; margin-bottom: 1.5rem; }
+        .card-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: var(--color-primary); display: flex; align-items: center; gap: 0.5rem; }
+        .card-title::before { content: ''; width: 4px; height: 1.25rem; background: var(--color-accent); border-radius: 2px; }
+
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        @media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .data-table th, .data-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--color-border); }
+        .data-table th { background: var(--color-table-header); font-weight: 600; color: var(--color-primary); font-size: 0.8rem; text-transform: uppercase; }
+
+        .optical-section { border-left: 4px solid var(--color-ppl); padding-left: 1rem; margin-bottom: 1.5rem; }
+        .optical-section.xpl { border-left-color: var(--color-xpl); }
+        .optical-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .optical-label.ppl { color: #8b6914; }
+        .optical-label.xpl { color: #1e6091; }
+
+        .image-placeholder { background: linear-gradient(135deg, #f0ede8 0%, #e5e2dc 100%); border: 2px dashed var(--color-border); border-radius: var(--radius); padding: 2rem; text-align: center; color: var(--color-text-muted); min-height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .image-placeholder-ref { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; background: rgba(0,0,0,0.05); padding: 0.25rem 0.5rem; border-radius: 4px; margin-top: 0.5rem; }
+
+        .stability-bar { display: flex; align-items: center; gap: 0.75rem; margin: 0.5rem 0; }
+        .stability-track { flex: 1; height: 8px; background: var(--color-border); border-radius: 4px; overflow: hidden; }
+        .stability-fill { height: 100%; border-radius: 4px; }
+        .stability-fill.high { background: linear-gradient(90deg, #4ade80, #22c55e); }
+        .stability-fill.moderate { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+        .stability-fill.low { background: linear-gradient(90deg, #f87171, #ef4444); }
+        .stability-label { font-size: 0.8rem; font-weight: 500; min-width: 80px; }
+        .stability-value { font-size: 0.8rem; color: var(--color-text-muted); min-width: 70px; text-align: right; }
+
+        .occurrence-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+        .occurrence-card { background: var(--color-table-header); border-radius: var(--radius); padding: 1rem; border-left: 3px solid var(--color-accent); }
+        .occurrence-title { font-weight: 600; margin-bottom: 0.5rem; color: var(--color-primary); }
+        .occurrence-desc { font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 0.5rem; }
+        .occurrence-features { font-size: 0.8rem; }
+        .occurrence-features strong { color: var(--color-accent); }
+
+        .tip-box { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: var(--radius); padding: 1rem 1.25rem; margin-top: 1rem; border-left: 4px solid #f59e0b; }
+        .tip-box-title { font-weight: 600; font-size: 0.85rem; color: #92400e; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .tip-box-content { font-size: 0.85rem; color: #78350f; }
+
+        .pleochroism-demo { display: flex; gap: 1rem; margin: 1rem 0; justify-content: center; }
+        .pleo-box { width: 80px; height: 60px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+
+        .footer { text-align: center; padding: 2rem; color: var(--color-text-muted); font-size: 0.8rem; border-top: 1px solid var(--color-border); margin-top: 2rem; }
+        .footer-logo { font-family: 'Playfair Display', serif; font-weight: 600; color: var(--color-primary); }
+    </style>
+</head>
+<body class="lang-en">
+    <header class="header">
+        <div class="header-content">
+            <div class="mineral-badge"><span class="en">Phyllosilicate / Mica</span><span class="de">Phyllosilikat / Glimmer</span></div>
+            <h1 class="mineral-name">Biotite</h1>
+            <div class="mineral-formula">K(Mg,Fe)<sub>3</sub>AlSi<sub>3</sub>O<sub>10</sub>(OH)<sub>2</sub></div>
+            <div class="header-meta">
+                <div class="meta-item">
+                    <span class="meta-label"><span class="en">Crystal System:</span><span class="de">Kristallsystem:</span></span>
+                    <span><span class="en">Monoclinic</span><span class="de">Monoklin</span></span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label"><span class="en">Hardness:</span><span class="de">Härte:</span></span>
+                    <span>2.5–3 (Mohs)</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label"><span class="en">Density:</span><span class="de">Dichte:</span></span>
+                    <span>2.7–3.3 g/cm³</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label"><span class="en">Cleavage:</span><span class="de">Spaltbarkeit:</span></span>
+                    <span><span class="en">Perfect {001} basal</span><span class="de">Perfekt {001} basal</span></span>
+                </div>
+            </div>
+        </div>
+        <div class="lang-toggle">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="de">DE</button>
+        </div>
+    </header>
+
+    <main class="main">
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-tab="optical"><span class="en">Optical Properties</span><span class="de">Optische Eigenschaften</span></button>
+            <button class="nav-tab" data-tab="occurrence"><span class="en">Occurrence</span><span class="de">Vorkommen</span></button>
+            <button class="nav-tab" data-tab="stability"><span class="en">Stability & Diagenesis</span><span class="de">Stabilität & Diagenese</span></button>
+            <button class="nav-tab" data-tab="recognition"><span class="en">Recognition</span><span class="de">Erkennung</span></button>
+        </nav>
+
+        <!-- OPTICAL TAB -->
+        <section class="tab-content active" id="optical">
+            <div class="grid-2">
+                <div class="card">
+                    <h2 class="card-title"><span class="en">Plane-Polarized Light (PPL)</span><span class="de">Linear polarisiertes Licht (PPL)</span></h2>
+                    <div class="optical-section">
+                        <div class="optical-label ppl">PPL</div>
+                        <table class="data-table">
+                            <tr><td><span class="en">Relief</span><span class="de">Relief</span></td><td><span class="en">Moderate (n = 1.565–1.696)</span><span class="de">Mäßig (n = 1,565–1,696)</span></td></tr>
+                            <tr><td><span class="en">Color</span><span class="de">Farbe</span></td><td><span class="en">Brown to green-brown (varies with Fe content)</span><span class="de">Braun bis grün-braun (variiert mit Fe-Gehalt)</span></td></tr>
+                            <tr><td><span class="en">Pleochroism</span><span class="de">Pleochroismus</span></td><td><strong><span class="en">STRONG — diagnostic feature</span><span class="de">STARK — diagnostisches Merkmal</span></strong></td></tr>
+                            <tr><td><span class="en">Habit</span><span class="de">Habitus</span></td><td><span class="en">Platy, elongated flakes; often bent/kinked</span><span class="de">Plattig, längliche Schuppen; oft verbogen/geknickt</span></td></tr>
+                            <tr><td><span class="en">Cleavage</span><span class="de">Spaltbarkeit</span></td><td><span class="en">Perfect basal (one set, parallel to elongation)</span><span class="de">Perfekt basal (eine Schar, parallel zur Längserstreckung)</span></td></tr>
+                        </table>
+                    </div>
+                    
+                    <h3 style="font-size: 0.9rem; margin: 1rem 0 0.5rem; color: var(--color-primary);"><span class="en">Pleochroism Scheme</span><span class="de">Pleochroismus-Schema</span></h3>
+                    <div class="pleochroism-demo">
+                        <div class="pleo-box" style="background: #8B4513;">X/Y</div>
+                        <div class="pleo-box" style="background: #D2691E;">→</div>
+                        <div class="pleo-box" style="background: #F5DEB3; color: #333;">Z</div>
+                    </div>
+                    <p style="text-align: center; font-size: 0.8rem; color: var(--color-text-muted);"><span class="en">X,Y = dark brown | Z = pale yellow/colorless</span><span class="de">X,Y = dunkelbraun | Z = hellgelb/farblos</span></p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title"><span class="en">Cross-Polarized Light (XPL)</span><span class="de">Gekreuzt polarisiertes Licht (XPL)</span></h2>
+                    <div class="optical-section xpl">
+                        <div class="optical-label xpl">XPL</div>
+                        <table class="data-table">
+                            <tr><td><span class="en">Birefringence</span><span class="de">Doppelbrechung</span></td><td><span class="en">Moderate to high (δ = 0.03–0.07)</span><span class="de">Mäßig bis hoch (δ = 0,03–0,07)</span></td></tr>
+                            <tr><td><span class="en">Interference Colors</span><span class="de">Interferenzfarben</span></td><td><span class="en">Upper 2nd to 3rd order (often masked by color)</span><span class="de">Obere 2. bis 3. Ordnung (oft durch Eigenfarbe maskiert)</span></td></tr>
+                            <tr><td><span class="en">Extinction</span><span class="de">Auslöschung</span></td><td><span class="en">Parallel to cleavage ("birds-eye" extinction)</span><span class="de">Parallel zur Spaltbarkeit ("Vogelaugen"-Auslöschung)</span></td></tr>
+                            <tr><td><span class="en">Optical Character</span><span class="de">Optischer Charakter</span></td><td><span class="en">Biaxial (−), 2V = 0–25°</span><span class="de">Biaxial (−), 2V = 0–25°</span></td></tr>
+                        </table>
+                    </div>
+                    <div class="image-placeholder">
+                        <div style="font-size: 2rem;">🔬</div>
+                        <div style="font-size: 0.85rem;"><span class="en">XPL: Biotite showing "birds-eye" extinction pattern, bent cleavage</span><span class="de">XPL: Biotit mit "Vogelaugen"-Auslöschung, verbogene Spaltbarkeit</span></div>
+                        <div class="image-placeholder-ref">AAPG Atlas: Plate 15-16</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-box-title"><span>💡</span> <span class="en">Key Recognition</span><span class="de">Schlüsselerkennung</span></div>
+                <div class="tip-box-content"><span class="en"><strong>Strong brown pleochroism</strong> is the single most diagnostic feature of biotite. When rotating the stage in PPL, watch for dramatic color change from dark brown to pale yellow. No other common sandstone mineral shows this specific pleochroism scheme.</span><span class="de"><strong>Starker brauner Pleochroismus</strong> ist das wichtigste diagnostische Merkmal von Biotit. Beim Drehen des Tisches in PPL auf dramatischen Farbwechsel von dunkelbraun zu hellgelb achten. Kein anderes häufiges Sandsteinmineral zeigt dieses spezifische Pleochroismus-Schema.</span></div>
+            </div>
+        </section>
+
+        <!-- OCCURRENCE TAB -->
+        <section class="tab-content" id="occurrence">
+            <div class="card">
+                <h2 class="card-title"><span class="en">Biotite in Sandstone Petrography</span><span class="de">Biotit in der Sandstein-Petrographie</span></h2>
+                <div class="occurrence-grid">
+                    <div class="occurrence-card">
+                        <div class="occurrence-title"><span class="en">Detrital Biotite</span><span class="de">Detritischer Biotit</span></div>
+                        <div class="occurrence-desc"><span class="en">Free grains from source rock erosion</span><span class="de">Freie Körner aus Ausgangsgesteins-Erosion</span></div>
+                        <div class="occurrence-features">
+                            <strong><span class="en">Sources:</span><span class="de">Quellen:</span></strong> <span class="en">Granites, gneisses, schists, migmatites</span><span class="de">Granite, Gneise, Schiefer, Migmatite</span><br>
+                            <strong><span class="en">Features:</span><span class="de">Merkmale:</span></strong> <span class="en">Often bent, kinked, or deformed between rigid grains</span><span class="de">Oft verbogen, geknickt oder zwischen starren Körnern deformiert</span>
+                        </div>
+                    </div>
+                    <div class="occurrence-card">
+                        <div class="occurrence-title"><span class="en">In Metamorphic RF</span><span class="de">In Metamorphen GF</span></div>
+                        <div class="occurrence-desc"><span class="en">Within schist/gneiss rock fragments</span><span class="de">In Schiefer/Gneis-Gesteinsbruchstücken</span></div>
+                        <div class="occurrence-features">
+                            <strong><span class="en">Recognition:</span><span class="de">Erkennung:</span></strong> <span class="en">Aligned with foliation; associated with quartz ± feldspar ± garnet</span><span class="de">Eingeregelt mit Foliation; assoziiert mit Quarz ± Feldspat ± Granat</span>
+                        </div>
+                    </div>
+                    <div class="occurrence-card">
+                        <div class="occurrence-title"><span class="en">In Plutonic RF</span><span class="de">In Plutonischen GF</span></div>
+                        <div class="occurrence-desc"><span class="en">Within granite/granodiorite fragments</span><span class="de">In Granit/Granodiorit-Fragmenten</span></div>
+                        <div class="occurrence-features">
+                            <strong><span class="en">Recognition:</span><span class="de">Erkennung:</span></strong> <span class="en">Random orientation; associated with quartz + feldspar; often fresh</span><span class="de">Zufällige Orientierung; assoziiert mit Quarz + Feldspat; oft frisch</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-box-title"><span>💡</span> <span class="en">Provenance Significance</span><span class="de">Provenance-Bedeutung</span></div>
+                <div class="tip-box-content"><span class="en">Abundant detrital biotite indicates: (1) Proximal source (biotite is mechanically weak); (2) Metamorphic or plutonic source terrane; (3) Limited chemical weathering (biotite dissolves in humid climates). Biotite-rich sandstones suggest orogenic/cratonic sources with rapid erosion and burial.</span><span class="de">Reichlich detritischer Biotit zeigt an: (1) Proximale Quelle (Biotit ist mechanisch schwach); (2) Metamorphes oder plutonisches Quellgebiet; (3) Begrenzte chemische Verwitterung (Biotit löst sich in humiden Klimaten). Biotit-reiche Sandsteine deuten auf orogene/kratonische Quellen mit schneller Erosion und Versenkung hin.</span></div>
+            </div>
+        </section>
+
+        <!-- STABILITY TAB -->
+        <section class="tab-content" id="stability">
+            <div class="grid-2">
+                <div class="card">
+                    <h2 class="card-title"><span class="en">Weathering Resistance</span><span class="de">Verwitterungsresistenz</span></h2>
+                    <div class="stability-bar">
+                        <span class="stability-label"><span class="en">Chemical</span><span class="de">Chemisch</span></span>
+                        <div class="stability-track"><div class="stability-fill low" style="width: 30%;"></div></div>
+                        <span class="stability-value"><span class="en">Low</span><span class="de">Niedrig</span></span>
+                    </div>
+                    <div class="stability-bar">
+                        <span class="stability-label"><span class="en">Mechanical</span><span class="de">Mechanisch</span></span>
+                        <div class="stability-track"><div class="stability-fill low" style="width: 25%;"></div></div>
+                        <span class="stability-value"><span class="en">Very Low</span><span class="de">Sehr niedrig</span></span>
+                    </div>
+                    <table class="data-table" style="margin-top: 1rem;">
+                        <tr><td><span class="en">Weathering Products</span><span class="de">Verwitterungsprodukte</span></td><td><span class="en">Vermiculite, kaolinite, Fe-oxides</span><span class="de">Vermiculit, Kaolinit, Fe-Oxide</span></td></tr>
+                        <tr><td><span class="en">Mechanical Weakness</span><span class="de">Mechanische Schwäche</span></td><td><span class="en">Perfect cleavage → splits during transport</span><span class="de">Perfekte Spaltbarkeit → spaltet beim Transport</span></td></tr>
+                        <tr><td><span class="en">Hydraulic Behavior</span><span class="de">Hydraulisches Verhalten</span></td><td><span class="en">Platy shape → low settling velocity; concentrates in fine fractions</span><span class="de">Plattige Form → niedrige Sinkgeschwindigkeit; reichert sich in Feinfraktionen an</span></td></tr>
+                    </table>
+                </div>
+                <div class="card">
+                    <h2 class="card-title"><span class="en">Diagenetic Behavior</span><span class="de">Diagenetisches Verhalten</span></h2>
+                    <div class="stability-bar">
+                        <span class="stability-label"><span class="en">Dissolution</span><span class="de">Lösung</span></span>
+                        <div class="stability-track"><div class="stability-fill moderate" style="width: 40%;"></div></div>
+                        <span class="stability-value"><span class="en">Moderate</span><span class="de">Mäßig</span></span>
+                    </div>
+                    <div class="stability-bar">
+                        <span class="stability-label"><span class="en">Alteration</span><span class="de">Alteration</span></span>
+                        <div class="stability-track"><div class="stability-fill low" style="width: 30%;"></div></div>
+                        <span class="stability-value"><span class="en">Common</span><span class="de">Häufig</span></span>
+                    </div>
+                    <div class="stability-bar">
+                        <span class="stability-label"><span class="en">Compaction</span><span class="de">Kompaktion</span></span>
+                        <div class="stability-track"><div class="stability-fill low" style="width: 20%;"></div></div>
+                        <span class="stability-value"><span class="en">Ductile</span><span class="de">Duktil</span></span>
+                    </div>
+                    <table class="data-table" style="margin-top: 1rem;">
+                        <tr><td><span class="en">Chloritization</span><span class="de">Chloritisierung</span></td><td><span class="en">Biotite → chlorite (green color, lower birefringence)</span><span class="de">Biotit → Chlorit (grüne Farbe, niedrigere Doppelbrechung)</span></td></tr>
+                        <tr><td><span class="en">Compaction</span><span class="de">Kompaktion</span></td><td><span class="en">Bends and wraps around rigid grains; forms pseudo-matrix</span><span class="de">Biegt und umschließt starre Körner; bildet Pseudo-Matrix</span></td></tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- RECOGNITION TAB -->
+        <section class="tab-content" id="recognition">
+            <div class="card">
+                <h2 class="card-title"><span class="en">Biotite vs. Other Brown Minerals</span><span class="de">Biotit vs. andere braune Minerale</span></h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th><span class="en">Feature</span><span class="de">Merkmal</span></th>
+                            <th><span class="en">Biotite</span><span class="de">Biotit</span></th>
+                            <th><span class="en">Hornblende</span><span class="de">Hornblende</span></th>
+                            <th><span class="en">Tourmaline</span><span class="de">Turmalin</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><span class="en">Habit</span><span class="de">Habitus</span></td><td><span class="en">Platy flakes</span><span class="de">Plattige Schuppen</span></td><td><span class="en">Prismatic</span><span class="de">Prismatisch</span></td><td><span class="en">Prismatic, triangular</span><span class="de">Prismatisch, dreieckig</span></td></tr>
+                        <tr><td><span class="en">Cleavage</span><span class="de">Spaltbarkeit</span></td><td><span class="en">1 perfect basal</span><span class="de">1 perfekt basal</span></td><td><span class="en">2 at 56°/124°</span><span class="de">2 bei 56°/124°</span></td><td><span class="en">None</span><span class="de">Keine</span></td></tr>
+                        <tr><td><span class="en">Pleochroism</span><span class="de">Pleochroismus</span></td><td><span class="en">Brown ↔ pale yellow</span><span class="de">Braun ↔ hellgelb</span></td><td><span class="en">Green-brown ↔ yellow-green</span><span class="de">Grün-braun ↔ gelb-grün</span></td><td><span class="en">ω > ε (dark ↔ light along c)</span><span class="de">ω > ε (dunkel ↔ hell entlang c)</span></td></tr>
+                        <tr><td><span class="en">Extinction</span><span class="de">Auslöschung</span></td><td><span class="en">Parallel</span><span class="de">Parallel</span></td><td><span class="en">Inclined (~12-34°)</span><span class="de">Schief (~12-34°)</span></td><td><span class="en">Parallel</span><span class="de">Parallel</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-box-title"><span>🎯</span> <span class="en">Best Practice</span><span class="de">Beste Praxis</span></div>
+                <div class="tip-box-content"><span class="en">For biotite identification: (1) Look for platy/flaky habit with one perfect cleavage; (2) Confirm strong brown-to-yellow pleochroism by rotating stage; (3) Check for parallel extinction; (4) Note if grain is bent or deformed (common in sandstones). If grains are green instead of brown, consider chlorite (alteration product) or phlogopite (Mg-rich biotite).</span><span class="de">Für Biotit-Identifikation: (1) Nach plattigem/schuppigem Habitus mit einer perfekten Spaltbarkeit suchen; (2) Starken braun-zu-gelb Pleochroismus durch Tischrotation bestätigen; (3) Auf parallele Auslöschung prüfen; (4) Notieren, ob Korn verbogen oder deformiert ist (häufig in Sandsteinen). Wenn Körner grün statt braun sind, Chlorit (Alterationsprodukt) oder Phlogopit (Mg-reicher Biotit) in Betracht ziehen.</span></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-logo">GeoZentrum Nordbayern</div>
+        <div>Friedrich-Alexander-Universität Erlangen-Nürnberg</div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.nav-tab').forEach(function(tab) {
+            tab.onclick = function() {
+                document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
+                document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
+                this.classList.add('active');
+                document.getElementById(this.getAttribute('data-tab')).classList.add('active');
+            };
+        });
+        document.querySelectorAll('.lang-btn').forEach(function(btn) {
+            btn.onclick = function() {
+                var lang = this.getAttribute('data-lang');
+                document.body.classList.remove('lang-en', 'lang-de');
+                document.body.classList.add('lang-' + lang);
+                document.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.remove('active'); });
+                this.classList.add('active');
+            };
+        });
+    </script>
+</body>
+</html>

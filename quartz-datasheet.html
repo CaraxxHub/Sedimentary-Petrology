@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quartz | Mineral Data Sheet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #2c3e50;
+            --color-accent: #8b7355;
+            --color-accent-light: #c4a77d;
+            --color-bg: #faf9f7;
+            --color-card: #ffffff;
+            --color-text: #2c3e50;
+            --color-text-muted: #6b7280;
+            --color-border: #e5e2dc;
+            --color-table-header: #f5f3ef;
+            --color-ppl: #e8d4a8;
+            --color-xpl: #a8c8e8;
+            --color-stable: #4ade80;
+            --color-moderate: #fbbf24;
+            --color-unstable: #f87171;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -1px rgba(0,0,0,0.04);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
+            --radius: 8px;
+            --transition: 0.2s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        /* LANGUAGE SWITCHING - CSS BASED */
+        .en { display: inline; }
+        .de { display: none; }
+        body.lang-de .en { display: none !important; }
+        body.lang-de .de { display: inline !important; }
+        body.lang-en .en { display: inline !important; }
+        body.lang-en .de { display: none !important; }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--color-primary) 0%, #1a252f 100%);
+            color: white;
+            padding: 2rem 2rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='1'/%3E%3C/svg%3E");
+            background-size: 60px 60px;
+            opacity: 0.5;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mineral-badge {
+            display: inline-block;
+            background: var(--color-accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .mineral-name {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.02em;
+        }
+
+        .mineral-formula {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .mineral-formula sub {
+            font-size: 0.85em;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meta-label {
+            opacity: 0.7;
+        }
+
+        /* Language Toggle */
+        .lang-toggle {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .lang-btn.active {
+            background: var(--color-accent);
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Main Content */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--color-border);
+            padding-bottom: 0;
+        }
+
+        .nav-tab {
+            padding: 0.75rem 1.25rem;
+            border: none;
+            background: transparent;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: var(--transition);
+        }
+
+        .nav-tab:hover {
+            color: var(--color-text);
+        }
+
+        .nav-tab.active {
+            color: var(--color-accent);
+            border-bottom-color: var(--color-accent);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards */
+        .card {
+            background: var(--color-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-title::before {
+            content: '';
+            width: 4px;
+            height: 1.25rem;
+            background: var(--color-accent);
+            border-radius: 2px;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .data-table th {
+            background: var(--color-table-header);
+            font-weight: 600;
+            color: var(--color-primary);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table tr:hover td {
+            background: var(--color-table-header);
+        }
+
+        /* Optical Properties Sections */
+        .optical-section {
+            border-left: 4px solid var(--color-ppl);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .optical-section.xpl {
+            border-left-color: var(--color-xpl);
+        }
+
+        .optical-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .optical-label.ppl {
+            color: #8b6914;
+        }
+
+        .optical-label.xpl {
+            color: #1e6091;
+        }
+
+        /* Image Placeholders */
+        .image-placeholder {
+            background: linear-gradient(135deg, #f0ede8 0%, #e5e2dc 100%);
+            border: 2px dashed var(--color-border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            color: var(--color-text-muted);
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .image-placeholder-icon {
+            font-size: 2rem;
+            opacity: 0.5;
+        }
+
+        .image-placeholder-text {
+            font-size: 0.85rem;
+            max-width: 250px;
+        }
+
+        .image-placeholder-ref {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            background: rgba(0,0,0,0.05);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+        }
+
+        /* Stability Indicators */
+        .stability-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin: 0.5rem 0;
+        }
+
+        .stability-track {
+            flex: 1;
+            height: 8px;
+            background: var(--color-border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .stability-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .stability-fill.high {
+            background: linear-gradient(90deg, #4ade80, #22c55e);
+        }
+
+        .stability-fill.moderate {
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+        }
+
+        .stability-fill.low {
+            background: linear-gradient(90deg, #f87171, #ef4444);
+        }
+
+        .stability-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            min-width: 80px;
+        }
+
+        .stability-value {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            min-width: 60px;
+            text-align: right;
+        }
+
+        /* Occurrence Cards */
+        .occurrence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .occurrence-card {
+            background: var(--color-table-header);
+            border-radius: var(--radius);
+            padding: 1rem;
+            border-left: 3px solid var(--color-accent);
+        }
+
+        .occurrence-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--color-primary);
+        }
+
+        .occurrence-desc {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .occurrence-features {
+            font-size: 0.8rem;
+            color: var(--color-text);
+        }
+
+        .occurrence-features strong {
+            color: var(--color-accent);
+        }
+
+        /* Recognition Tips */
+        .tip-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            margin-top: 1rem;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .tip-box-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #92400e;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tip-box-content {
+            font-size: 0.85rem;
+            color: #78350f;
+        }
+
+        /* Bilingual Side-by-Side Blocks */
+        .bilingual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .lang-block {
+            padding: 0.75rem;
+            background: var(--color-table-header);
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+        }
+
+        .lang-block.de-block {
+            border-left: 3px solid #dc2626;
+        }
+
+        .lang-block.en-block {
+            border-left: 3px solid #2563eb;
+        }
+
+        .lang-flag {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+            opacity: 0.6;
+        }
+
+        /* Print Styles */
+        @media print {
+            .header {
+                background: var(--color-primary) !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .nav-tabs, .lang-toggle {
+                display: none;
+            }
+            .tab-content {
+                display: block !important;
+                page-break-inside: avoid;
+            }
+            .card {
+                box-shadow: none;
+                border: 1px solid var(--color-border);
+            }
+            .en, .de { display: inline !important; }
+            .en::after { content: ' / '; }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--color-text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--color-border);
+            margin-top: 2rem;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 0.25rem;
+        }
+    </style>
+</head>
+<body class="lang-en">
+    <header class="header">
+        <div class="header-content">
+            <div class="mineral-badge"><span class="en">Framework Grain</span><span class="de">Gerüstkorn</span></div>
+            <h1 class="mineral-name">Quartz</h1>
+            <div class="mineral-formula">SiO<sub>2</sub></div>
+            <div class="header-meta">
+                <div class="meta-item">
+                    <span class="meta-label"><span class="en">Crystal System:</span><span class="de">Kristallsystem:</span></span>
+                    <span><span class="en">Trigonal</span><span class="de">Trigonal</span></span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label"><span class="en">Hardness:</span><span class="de">Härte:</span></span>
+                    <span>7 (Mohs)</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label"><span class="en">Density:</span><span class="de">Dichte:</span></span>
+                    <span>2.65 g/cm³</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label"><span class="en">Cleavage:</span><span class="de">Spaltbarkeit:</span></span>
+                    <span><span class="en">None (conchoidal fracture)</span><span class="de">Keine (muscheliger Bruch)</span></span>
+                </div>
+            </div>
+        </div>
+        <div class="lang-toggle">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="de">DE</button>
+        </div>
+    </header>
+
+    <main class="main">
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-tab="optical"><span class="en">Optical Properties</span><span class="de">Optische Eigenschaften</span></button>
+            <button class="nav-tab" data-tab="occurrence"><span class="en">Occurrence</span><span class="de">Vorkommen</span></button>
+            <button class="nav-tab" data-tab="stability"><span class="en">Stability & Diagenesis</span><span class="de">Stabilität & Diagenese</span></button>
+            <button class="nav-tab" data-tab="recognition"><span class="en">Recognition</span><span class="de">Erkennung</span></button>
+        </nav>
+
+        <!-- OPTICAL PROPERTIES TAB -->
+        <section class="tab-content active" id="optical">
+            <div class="grid-2">
+                <div class="card">
+                    <h2 class="card-title"><span class="en">Plane-Polarized Light (PPL)</span><span class="de">Linear polarisiertes Licht (PPL)</span></h2>
+                    
+                    <div class="optical-section">
+                        <div class="optical-label ppl">PPL</div>
+                        <table class="data-table">
+                            <tr>
+                                <td class="prop-label"><span class="en">Relief</span><span class="de">Relief</span></td>
+                                <td class="prop-value"><span class="en">Low (n = 1.544–1.553)</span><span class="de">Niedrig (n = 1,544–1,553)</span></td>
+                            </tr>
+                            <tr>
+                                <td class="prop-label"><span class="en">Color</span><span class="de">Farbe</span></td>
+                                <td class="prop-value"><span class="en">Colorless</span><span class="de">Farblos</span></td>
+                            </tr>
+                            <tr>
+                                <td class="prop-label"><span class="en">Pleochroism</span><span class="de">Pleochroismus</span></td>
+                                <td class="prop-value"><span class="en">None</span><span class="de">Keiner</span></td>
+                            </tr>
+                            <tr>
+                                <td class="prop-label"><span class="en">Cleavage</span><span class="de">Spaltbarkeit</span></td>
+                                <td class="prop-value"><span class="en">Absent</span><span class="de">Nicht vorhanden</span></td>
+                            </tr>
+                            <tr>
+                                <td class="prop-label"><span class="en">Inclusions</span><span class="de">Einschlüsse</span></td>
+                                <td class="prop-value"><span class="en">Fluid inclusions, rutile needles, zircon</span><span class="de">Flüssigkeitseinschlüsse, Rutilnadeln, Zirkon</span></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="image-placeholder">
+                        <div class="image-placeholder-icon">🔬</div>
+                        <div class="image-placeholder-text"><span class="en">PPL photomicrograph: Monocrystalline quartz grain showing low relief, colorless appearance, no cleavage</span><span class="de">PPL-Mikrofoto: Monokristalliner Quarzkorn mit niedrigem Relief, farblos, ohne Spaltbarkeit</span></div>
+                        <div class="image-placeholder-ref">AAPG Atlas: Plate 1, Fig. 1-2</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title"><span class="en">Cross-Polarized Light (XPL)</span><span class="de">Gekreuzt polarisiertes Licht (XPL)</span></h2>
+                    
+                    <div class="optical-section xpl">
+                        <div class="optical-label xpl">XPL</div>
+                        <table class="data-table">
+                            <tr>
+                                <td class="prop-label"><span class="en">Birefringence</span><span class="de">Doppelbrechung</span></td>
+                                <td class="prop-value"><span class="en">Low (δ = 0.009)</span><span class="de">Niedrig (δ = 0,009)</span></td>
+                            </tr>
+                            <tr>
+                                <td class="prop-label"><span class="en">Interference Colors</span><span class="de">Interferenzfarben</span></td>
+                                <td class="prop-value"><span class="en">1st order gray-white</span><span class="de">1. Ordnung grau-weiß</span></td>
+                            </tr>
+                            <tr>
+                                <td class="prop-label"><span class="en">Extinction</span><span class="de">Auslöschung</span></td>
+                                <td class="prop-value"><span class="en">Straight (parallel)</span><span class="de">Gerade (parallel)</span></td>
+                            </tr>
+                            <tr>
+                                <td class="prop-label"><span class="en">Twinning</span><span class="de">Verzwillingung</span></td>
+                                <td class="prop-value"><span class="en">Rare (Dauphiné, not visible)</span><span class="de">Selten (Dauphiné, nicht sichtbar)</span></td>
+                            </tr>
+                            <tr>
+                                <td class="prop-label"><span class="en">Optical Character</span><span class="de">Optischer Charakter</span></td>
+                                <td class="prop-value"><span class="en">Uniaxial (+)</span><span class="de">Uniaxial (+)</span></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="image-placeholder">
+                        <div class="image-placeholder-icon">🔬</div>
+                        <div class="image-placeholder-text"><span class="en">XPL photomicrograph: Quartz showing first-order gray interference colors, straight extinction</span><span class="de">XPL-Mikrofoto: Quarz mit Interferenzfarben 1. Ordnung grau, gerade Auslöschung</span></div>
+                        <div class="image-placeholder-ref">AAPG Atlas: Plate 1, Fig. 3-4</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title"><span class="en">Diagnostic Extinction Types</span><span class="de">Diagnostische Auslöschungstypen</span></h2>
+                <div class="grid-3">
+                    <div class="occurrence-card">
+                        <div class="occurrence-title"><span class="en">Straight Extinction</span><span class="de">Gerade Auslöschung</span></div>
+                        <div class="occurrence-desc"><span class="en">Uniform extinction across entire grain</span><span class="de">Gleichmäßige Auslöschung über das gesamte Korn</span></div>
+                        <div class="occurrence-features"><strong><span class="en">Indicates:</span><span class="de">Zeigt an:</span></strong> <span class="en">Unstrained plutonic or volcanic origin, or well-annealed metamorphic quartz</span><span class="de">Undeformierte plutonische oder vulkanische Herkunft, oder gut rekristallisierter metamorpher Quarz</span></div>
+                    </div>
+                    <div class="occurrence-card">
+                        <div class="occurrence-title"><span class="en">Undulose Extinction</span><span class="de">Undulöse Auslöschung</span></div>
+                        <div class="occurrence-desc"><span class="en">Sweeping extinction across grain (>5° rotation)</span><span class="de">Wandernde Auslöschung über das Korn (>5° Rotation)</span></div>
+                        <div class="occurrence-features"><strong><span class="en">Indicates:</span><span class="de">Zeigt an:</span></strong> <span class="en">Crystal lattice strain from deformation; common in metamorphic and tectonized plutonic sources</span><span class="de">Kristallgitterspannung durch Deformation; häufig bei metamorphen und tektonisierten plutonischen Quellen</span></div>
+                    </div>
+                    <div class="occurrence-card">
+                        <div class="occurrence-title"><span class="en">Subgrain Domains</span><span class="de">Subkorndomänen</span></div>
+                        <div class="occurrence-desc"><span class="en">Multiple extinction domains within single grain</span><span class="de">Mehrere Auslöschungsdomänen innerhalb eines Korns</span></div>
+                        <div class="occurrence-features"><strong><span class="en">Indicates:</span><span class="de">Zeigt an:</span></strong> <span class="en">Advanced recovery/recrystallization; transition to polycrystalline quartz</span><span class="de">Fortgeschrittene Erholung/Rekristallisation; Übergang zu polykristallinem Quarz</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OCCURRENCE TAB -->
+        <section class="tab-content" id="occurrence">
+            <div class="card">
+                <h2 class="card-title"><span class="en">Quartz Types in Sandstone Petrography</span><span class="de">Quarztypen in der Sandstein-Petrographie</span></h2>
+                <p style="color: var(--color-text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;"><span class="en">Classification following Basu et al. (1975) and Tortosa et al. (1991). Provenance significance after Weltje (2012) and Garzanti (2016).</span><span class="de">Klassifikation nach Basu et al. (1975) und Tortosa et al. (1991). Provenance-Bedeutung nach Weltje (2012) und Garzanti (2016).</span></p>
+                
+                <div class="occurrence-grid">
+                    <div class="occurrence-card">
+                        <div class="occurrence-title">Qm — <span class="en">Monocrystalline Quartz</span><span class="de">Monokristalliner Quarz</span></div>
+                        <div class="occurrence-desc"><span class="en">Single crystal grain, no internal boundaries</span><span class="de">Einzelkristallkorn, keine internen Grenzen</span></div>
+                        <div class="occurrence-features">
+                            <strong><span class="en">Sources:</span><span class="de">Quellen:</span></strong> <span class="en">Plutonic rocks, high-grade metamorphics, volcanic rocks, recycled sediments</span><span class="de">Plutonite, hochgradige Metamorphite, Vulkanite, recycelte Sedimente</span><br>
+                            <strong><span class="en">Recognition:</span><span class="de">Erkennung:</span></strong> <span class="en">Single extinction position, uniform interference color</span><span class="de">Einzelne Auslöschungsposition, einheitliche Interferenzfarbe</span>
+                        </div>
+                    </div>
+                    
+                    <div class="occurrence-card">
+                        <div class="occurrence-title">Qp — <span class="en">Polycrystalline Quartz</span><span class="de">Polykristalliner Quarz</span></div>
+                        <div class="occurrence-desc"><span class="en">Aggregate of ≥2 crystals with sutured/straight contacts</span><span class="de">Aggregat aus ≥2 Kristallen mit suturierten/geraden Kontakten</span></div>
+                        <div class="occurrence-features">
+                            <strong><span class="en">Sources:</span><span class="de">Quellen:</span></strong> <span class="en">Metamorphic rocks (quartzite, gneiss, schist), plutonic rocks, chert</span><span class="de">Metamorphite (Quarzit, Gneis, Schiefer), Plutonite, Hornstein</span><br>
+                            <strong><span class="en">Recognition:</span><span class="de">Erkennung:</span></strong> <span class="en">Multiple crystals with different extinction angles</span><span class="de">Mehrere Kristalle mit unterschiedlichen Auslöschungswinkeln</span>
+                        </div>
+                    </div>
+                    
+                    <div class="occurrence-card">
+                        <div class="occurrence-title">Qp >3 (<span class="en">fine-grained</span><span class="de">feinkörnig</span>)</div>
+                        <div class="occurrence-desc"><span class="en">Polycrystalline quartz with >3 subgrains, often fine-grained</span><span class="de">Polykristalliner Quarz mit >3 Subkörnern, oft feinkörnig</span></div>
+                        <div class="occurrence-features">
+                            <strong><span class="en">Sources:</span><span class="de">Quellen:</span></strong> <span class="en">Low-grade metamorphic rocks, chert, silicified rocks</span><span class="de">Niedriggradige Metamorphite, Hornstein, verkieselte Gesteine</span><br>
+                            <strong><span class="en">Recognition:</span><span class="de">Erkennung:</span></strong> <span class="en">Fine mosaic texture, often with sutured boundaries</span><span class="de">Feine Mosaikstruktur, oft mit suturierten Grenzen</span>
+                        </div>
+                    </div>
+                    
+                    <div class="occurrence-card">
+                        <div class="occurrence-title"><span class="en">Quartz in PRF</span><span class="de">Quarz in PRF</span></div>
+                        <div class="occurrence-desc"><span class="en">Quartz within plutonic rock fragments</span><span class="de">Quarz in plutonischen Gesteinsbruchstücken</span></div>
+                        <div class="occurrence-features">
+                            <strong><span class="en">Recognition:</span><span class="de">Erkennung:</span></strong> <span class="en">Coarse grain, associated with K-feldspar ± plagioclase ± biotite; graphic or granophyric intergrowths possible</span><span class="de">Grobes Korn, assoziiert mit K-Feldspat ± Plagioklas ± Biotit; graphische oder granophyrische Verwachsungen möglich</span>
+                        </div>
+                    </div>
+                    
+                    <div class="occurrence-card">
+                        <div class="occurrence-title"><span class="en">Quartz in MRF</span><span class="de">Quarz in MRF</span></div>
+                        <div class="occurrence-desc"><span class="en">Quartz within metamorphic rock fragments</span><span class="de">Quarz in metamorphen Gesteinsbruchstücken</span></div>
+                        <div class="occurrence-features">
+                            <strong><span class="en">Recognition:</span><span class="de">Erkennung:</span></strong> <span class="en">Variable grain size; often elongated/flattened with preferred orientation; associated with micas, may show ribbon texture</span><span class="de">Variable Korngröße; oft verlängert/abgeflacht mit Vorzugsorientierung; assoziiert mit Glimmern, kann Bänderstruktur zeigen</span>
+                        </div>
+                    </div>
+                    
+                    <div class="occurrence-card">
+                        <div class="occurrence-title"><span class="en">Quartz in VRF</span><span class="de">Quarz in VRF</span></div>
+                        <div class="occurrence-desc"><span class="en">Quartz phenocrysts in volcanic rock fragments</span><span class="de">Quarz-Phänokristalle in vulkanischen Gesteinsbruchstücken</span></div>
+                        <div class="occurrence-features">
+                            <strong><span class="en">Recognition:</span><span class="de">Erkennung:</span></strong> <span class="en">Euhedral to subhedral; embayments from magma resorption; in microcrystalline or glassy groundmass</span><span class="de">Idiomorph bis hypidiomorph; Einbuchtungen durch Magma-Resorption; in mikrokristalliner oder glasiger Grundmasse</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="image-placeholder" style="margin-top: 1.5rem;">
+                    <div class="image-placeholder-icon">📊</div>
+                    <div class="image-placeholder-text"><span class="en">Composite figure: Examples of Qm, Qp, and quartz in lithic fragments (PRF, MRF, VRF) — 6-panel layout recommended</span><span class="de">Zusammengesetzte Abbildung: Beispiele für Qm, Qp und Quarz in lithischen Fragmenten (PRF, MRF, VRF) — 6-Panel-Layout empfohlen</span></div>
+                    <div class="image-placeholder-ref">AAPG Atlas: Plate 2–4</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-box-title">
+                    <span>💡</span>
+                    <span><span class="en">Provenance Tip</span><span class="de">Provenance-Tipp</span></span>
+                </div>
+                <div class="tip-box-content"><span class="en">The Qm/Qp ratio and extinction characteristics (straight vs. undulose) have been used to distinguish plutonic from metamorphic sources (Basu et al. 1975). However, this approach has limitations: recycling, diagenesis, and source rock heterogeneity can obscure primary signals. Use with caution and integrate with other provenance indicators.</span><span class="de">Das Qm/Qp-Verhältnis und die Auslöschungscharakteristik (gerade vs. undulös) wurden verwendet, um plutonische von metamorphen Quellen zu unterscheiden (Basu et al. 1975). Dieser Ansatz hat jedoch Einschränkungen: Recycling, Diagenese und Ausgangsgesteins-Heterogenität können primäre Signale verschleiern. Mit Vorsicht verwenden und mit anderen Provenance-Indikatoren integrieren.</span></div>
+            </div>
+        </section>
+
+        <!-- STABILITY & DIAGENESIS TAB -->
+        <section class="tab-content" id="stability">
+            <div class="grid-2">
+                <div class="card">
+                    <h2 class="card-title"><span class="en">Weathering Resistance</span><span class="de">Verwitterungsresistenz</span></h2>
+                    
+                    <div class="stability-bar">
+                        <span class="stability-label"><span class="en">Chemical</span><span class="de">Chemisch</span></span>
+                        <div class="stability-track">
+                            <div class="stability-fill high" style="width: 95%;"></div>
+                        </div>
+                        <span class="stability-value"><span class="en">Very High</span><span class="de">Sehr Hoch</span></span>
+                    </div>
+                    
+                    <div class="stability-bar">
+                        <span class="stability-label"><span class="en">Mechanical</span><span class="de">Mechanisch</span></span>
+                        <div class="stability-track">
+                            <div class="stability-fill high" style="width: 85%;"></div>
+                        </div>
+                        <span class="stability-value"><span class="en">High</span><span class="de">Hoch</span></span>
+                    </div>
+
+                    <table class="data-table" style="margin-top: 1rem;">
+                        <tr>
+                            <th colspan="2"><span class="en">Weathering Behavior</span><span class="de">Verwitterungsverhalten</span></th>
+                        </tr>
+                        <tr>
+                            <td class="prop-label"><span class="en">Goldich Stability</span><span class="de">Goldich-Stabilität</span></td>
+                            <td class="prop-value"><span class="en">Most stable silicate</span><span class="de">Stabilstes Silikat</span></td>
+                        </tr>
+                        <tr>
+                            <td class="prop-label"><span class="en">Dissolution Rate</span><span class="de">Lösungsrate</span></td>
+                            <td class="prop-value"><span class="en">Extremely slow (10⁻¹⁴ mol/m²/s)</span><span class="de">Extrem langsam (10⁻¹⁴ mol/m²/s)</span></td>
+                        </tr>
+                        <tr>
+                            <td class="prop-label"><span class="en">Mechanical Behavior</span><span class="de">Mechanisches Verhalten</span></td>
+                            <td class="prop-value"><span class="en">Conchoidal fracture, no cleavage planes</span><span class="de">Muscheliger Bruch, keine Spaltebenen</span></td>
+                        </tr>
+                        <tr>
+                            <td class="prop-label"><span class="en">Transport Survival</span><span class="de">Transportüberleben</span></td>
+                            <td class="prop-value"><span class="en">Excellent — survives multiple cycles</span><span class="de">Ausgezeichnet — überlebt mehrere Zyklen</span></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title"><span class="en">Diagenetic Behavior</span><span class="de">Diagenetisches Verhalten</span></h2>
+                    
+                    <div class="stability-bar">
+                        <span class="stability-label"><span class="en">Dissolution</span><span class="de">Lösung</span></span>
+                        <div class="stability-track">
+                            <div class="stability-fill high" style="width: 90%;"></div>
+                        </div>
+                        <span class="stability-value"><span class="en">Resistant</span><span class="de">Resistent</span></span>
+                    </div>
+                    
+                    <div class="stability-bar">
+                        <span class="stability-label"><span class="en">Replacement</span><span class="de">Ersetzung</span></span>
+                        <div class="stability-track">
+                            <div class="stability-fill high" style="width: 85%;"></div>
+                        </div>
+                        <span class="stability-value"><span class="en">Resistant</span><span class="de">Resistent</span></span>
+                    </div>
+                    
+                    <div class="stability-bar">
+                        <span class="stability-label"><span class="en">Compaction</span><span class="de">Kompaktion</span></span>
+                        <div class="stability-track">
+                            <div class="stability-fill high" style="width: 95%;"></div>
+                        </div>
+                        <span class="stability-value"><span class="en">Rigid</span><span class="de">Starr</span></span>
+                    </div>
+
+                    <table class="data-table" style="margin-top: 1rem;">
+                        <tr>
+                            <th colspan="2"><span class="en">Diagenetic Features</span><span class="de">Diagenetische Merkmale</span></th>
+                        </tr>
+                        <tr>
+                            <td class="prop-label"><span class="en">Overgrowths</span><span class="de">Anwachssäume</span></td>
+                            <td class="prop-value"><span class="en">Common — syntaxial, same optical orientation</span><span class="de">Häufig — syntaxial, gleiche optische Orientierung</span></td>
+                        </tr>
+                        <tr>
+                            <td class="prop-label"><span class="en">Pressure Solution</span><span class="de">Drucklösung</span></td>
+                            <td class="prop-value"><span class="en">Stylolites, sutured grain contacts</span><span class="de">Stylolithen, suturierte Kornkontakte</span></td>
+                        </tr>
+                        <tr>
+                            <td class="prop-label"><span class="en">Silica Source</span><span class="de">Siliziumquelle</span></td>
+                            <td class="prop-value"><span class="en">Internal (stylolites) or external (shale)</span><span class="de">Intern (Stylolithen) oder extern (Tonstein)</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title"><span class="en">Recognizing Diagenetic Features</span><span class="de">Erkennung diagenetischer Merkmale</span></h2>
+                <div class="grid-2">
+                    <div>
+                        <h3 style="font-size: 1rem; margin-bottom: 0.75rem; color: var(--color-primary);"><span class="en">Quartz Overgrowths</span><span class="de">Quarz-Anwachssäume</span></h3>
+                        <ul style="margin-left: 1.25rem; color: var(--color-text-muted); font-size: 0.9rem;">
+                            <li><span class="en">Dust rims mark boundary between detrital grain and overgrowth</span><span class="de">Staubsäume markieren Grenze zwischen detritalem Korn und Anwachssaum</span></li>
+                            <li><span class="en">Syntaxial = same crystallographic orientation (simultaneous extinction)</span><span class="de">Syntaxial = gleiche kristallographische Orientierung (gleichzeitige Auslöschung)</span></li>
+                            <li><span class="en">Euhedral crystal faces may develop into pore space</span><span class="de">Idiomorphe Kristallflächen können sich in den Porenraum entwickeln</span></li>
+                            <li><span class="en">Best visible with CL (cathodoluminescence)</span><span class="de">Am besten sichtbar mit CL (Kathodolumineszenz)</span></li>
+                        </ul>
+                        <div class="image-placeholder" style="margin-top: 1rem; min-height: 150px;">
+                            <div class="image-placeholder-text"><span class="en">Quartz overgrowth with visible dust rim</span><span class="de">Quarz-Anwachssaum mit sichtbarem Staubsaum</span></div>
+                            <div class="image-placeholder-ref">AAPG Atlas: Plate 45</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1rem; margin-bottom: 0.75rem; color: var(--color-primary);"><span class="en">Pressure Solution Features</span><span class="de">Drucklösungsmerkmale</span></h3>
+                        <ul style="margin-left: 1.25rem; color: var(--color-text-muted); font-size: 0.9rem;">
+                            <li><span class="en">Sutured grain contacts (concavo-convex, interpenetrating)</span><span class="de">Suturierte Kornkontakte (konkav-konvex, interpenetrierend)</span></li>
+                            <li><span class="en">Stylolites with insoluble residue concentration</span><span class="de">Stylolithen mit Anreicherung unlöslicher Rückstände</span></li>
+                            <li><span class="en">Reduced IGV (intergranular volume)</span><span class="de">Reduziertes IGV (intergranulares Volumen)</span></li>
+                            <li><span class="en">Common in quartzarenites at depth >2-3 km</span><span class="de">Häufig in Quarzsandsteinen bei Tiefen >2-3 km</span></li>
+                        </ul>
+                        <div class="image-placeholder" style="margin-top: 1rem; min-height: 150px;">
+                            <div class="image-placeholder-text"><span class="en">Sutured quartz grain contacts / stylolite</span><span class="de">Suturierte Quarz-Kornkontakte / Stylolith</span></div>
+                            <div class="image-placeholder-ref">AAPG Atlas: Plate 46-47</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-box-title">
+                    <span>⚠️</span>
+                    <span><span class="en">Diagenetic Caution</span><span class="de">Diagenetische Warnung</span></span>
+                </div>
+                <div class="tip-box-content"><span class="en">Quartz is the most stable framework grain, but pressure solution can significantly reduce original quartz content in deeply buried quartzarenites. The silica released becomes a source for overgrowths elsewhere. Always assess IGV and grain contact types to evaluate compaction history before interpreting original composition.</span><span class="de">Quarz ist das stabilste Gerüstkorn, aber Drucklösung kann den ursprünglichen Quarzgehalt in tief versenkten Quarzsandsteinen erheblich reduzieren. Das freigesetzte Silizium wird zur Quelle für Anwachssäume anderswo. Immer IGV und Kornkontakttypen bewerten, um die Kompaktion zu evaluieren, bevor die ursprüngliche Zusammensetzung interpretiert wird.</span></div>
+            </div>
+        </section>
+
+        <!-- RECOGNITION TAB -->
+        <section class="tab-content" id="recognition">
+            <div class="card">
+                <h2 class="card-title"><span class="en">Quick Identification Key</span><span class="de">Schnellbestimmungsschlüssel</span></h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th><span class="en">Feature</span><span class="de">Merkmal</span></th>
+                            <th><span class="en">Quartz</span><span class="de">Quarz</span></th>
+                            <th><span class="en">Common Confusions</span><span class="de">Häufige Verwechslungen</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="en">Relief (PPL)</span><span class="de">Relief (PPL)</span></td>
+                            <td><span class="en">Low</span><span class="de">Niedrig</span></td>
+                            <td><span class="en">Feldspar: similar | Calcite: variable (higher)</span><span class="de">Feldspat: ähnlich | Calcit: variabel (höher)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Color (PPL)</span><span class="de">Farbe (PPL)</span></td>
+                            <td><span class="en">Colorless, clean</span><span class="de">Farblos, klar</span></td>
+                            <td><span class="en">Feldspar: often cloudy/altered</span><span class="de">Feldspat: oft trüb/alteriert</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Cleavage</span><span class="de">Spaltbarkeit</span></td>
+                            <td><span class="en">None</span><span class="de">Keine</span></td>
+                            <td><span class="en">Feldspar: 2 sets at ~90° | Calcite: 3 perfect sets</span><span class="de">Feldspat: 2 Scharen bei ~90° | Calcit: 3 perfekte Scharen</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Birefringence</span><span class="de">Doppelbrechung</span></td>
+                            <td><span class="en">Low (1st order gray)</span><span class="de">Niedrig (1. Ordnung grau)</span></td>
+                            <td><span class="en">Feldspar: similar | Calcite: extreme (high-order)</span><span class="de">Feldspat: ähnlich | Calcit: extrem (höhere Ordnung)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Twinning</span><span class="de">Verzwillingung</span></td>
+                            <td><span class="en">Absent (optically)</span><span class="de">Nicht sichtbar (optisch)</span></td>
+                            <td><span class="en">Plagioclase: polysynthetic | K-spar: Carlsbad, tartan</span><span class="de">Plagioklas: polysynthetisch | K-Feldspat: Karlsbader, Tartan</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Alteration</span><span class="de">Alteration</span></td>
+                            <td><span class="en">Fresh, unaltered</span><span class="de">Frisch, unalteriert</span></td>
+                            <td><span class="en">Feldspar: sericite, clay, calcite replacement</span><span class="de">Feldspat: Serizit, Ton, Calcit-Ersetzung</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h2 class="card-title"><span class="en">Distinguishing Quartz from Feldspar</span><span class="de">Unterscheidung Quarz von Feldspat</span></h2>
+                    <div class="bilingual">
+                        <div class="lang-block en-block">
+                            <div class="lang-flag">English</div>
+                            <ol style="margin-left: 1.25rem; font-size: 0.9rem;">
+                                <li><strong>Cleavage:</strong> Quartz has none; feldspars show 2 cleavage sets</li>
+                                <li><strong>Alteration:</strong> Quartz stays clean; feldspars alter to clays/sericite</li>
+                                <li><strong>Twinning:</strong> Quartz lacks visible twins; feldspars show characteristic twinning</li>
+                                <li><strong>Staining test:</strong> K-feldspar stains yellow with sodium cobaltinitrite</li>
+                            </ol>
+                        </div>
+                        <div class="lang-block de-block">
+                            <div class="lang-flag">Deutsch</div>
+                            <ol style="margin-left: 1.25rem; font-size: 0.9rem;">
+                                <li><strong>Spaltbarkeit:</strong> Quarz hat keine; Feldspäte zeigen 2 Spaltscharen</li>
+                                <li><strong>Alteration:</strong> Quarz bleibt klar; Feldspäte alterieren zu Ton/Serizit</li>
+                                <li><strong>Verzwillingung:</strong> Quarz ohne sichtbare Zwillinge; Feldspäte mit charakteristischer Verzwillingung</li>
+                                <li><strong>Färbetest:</strong> K-Feldspat färbt sich gelb mit Natriumkobaltinitrit</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title"><span class="en">Common Mistakes to Avoid</span><span class="de">Häufige Fehler vermeiden</span></h2>
+                    <div class="bilingual">
+                        <div class="lang-block en-block">
+                            <div class="lang-flag">English</div>
+                            <ul style="margin-left: 1.25rem; font-size: 0.9rem;">
+                                <li><strong>Chert vs. Qp:</strong> Chert is microcrystalline; true Qp shows distinct crystal boundaries</li>
+                                <li><strong>Overgrowth boundaries:</strong> Don't count overgrowth as separate grain</li>
+                                <li><strong>Fresh feldspar:</strong> Very fresh plagioclase can look like quartz — check for twinning</li>
+                                <li><strong>Carbonate replacement:</strong> Partially replaced quartz may show anomalous birefringence</li>
+                            </ul>
+                        </div>
+                        <div class="lang-block de-block">
+                            <div class="lang-flag">Deutsch</div>
+                            <ul style="margin-left: 1.25rem; font-size: 0.9rem;">
+                                <li><strong>Hornstein vs. Qp:</strong> Hornstein ist mikrokristallin; echter Qp zeigt deutliche Kristallgrenzen</li>
+                                <li><strong>Anwachssaum-Grenzen:</strong> Anwachssaum nicht als separates Korn zählen</li>
+                                <li><strong>Frischer Feldspat:</strong> Sehr frischer Plagioklas kann wie Quarz aussehen — auf Verzwillingung prüfen</li>
+                                <li><strong>Karbonat-Ersetzung:</strong> Teilweise ersetzter Quarz kann anomale Doppelbrechung zeigen</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title"><span class="en">Decision Flowchart</span><span class="de">Entscheidungsflussdiagramm</span></h2>
+                <div class="image-placeholder" style="min-height: 250px;">
+                    <div class="image-placeholder-icon">📋</div>
+                    <div class="image-placeholder-text"><span class="en">Quartz identification flowchart: Start with relief → check cleavage → evaluate alteration → confirm with extinction/birefringence</span><span class="de">Quarz-Bestimmungsflussdiagramm: Beginne mit Relief → prüfe Spaltbarkeit → bewerte Alteration → bestätige mit Auslöschung/Doppelbrechung</span></div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-box-title">
+                    <span>🎯</span>
+                    <span><span class="en">Best Practice</span><span class="de">Beste Praxis</span></span>
+                </div>
+                <div class="tip-box-content"><span class="en">When uncertain between quartz and untwinned feldspar: (1) Check multiple grains — at least some feldspars will show twinning or alteration; (2) Rotate stage to find cleavage traces; (3) Look for associated altered grains that confirm feldspar presence in the sample. If still uncertain, use staining or SEM-EDS.</span><span class="de">Bei Unsicherheit zwischen Quarz und unverzwillingtem Feldspat: (1) Mehrere Körner prüfen — mindestens einige Feldspäte zeigen Verzwillingung oder Alteration; (2) Tisch rotieren um Spaltspuren zu finden; (3) Nach assoziierten alterierten Körnern suchen, die Feldspat-Präsenz in der Probe bestätigen. Bei weiterhin Unsicherheit, Färbung oder REM-EDX verwenden.</span></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-logo">GeoZentrum Nordbayern</div>
+        <div>Friedrich-Alexander-Universität Erlangen-Nürnberg</div>
+        <div style="margin-top: 0.5rem;"><span class="en">Sandstone Petrography Course Materials</span><span class="de">Sandstein-Petrographie Kursmaterialien</span></div>
+    </footer>
+
+    <script>
+        // Tab navigation
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                this.classList.add('active');
+                document.getElementById(this.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Language toggle - exact pattern from working test
+        document.querySelectorAll('.lang-btn').forEach(function(btn) {
+            btn.onclick = function() {
+                var lang = this.getAttribute('data-lang');
+                
+                // Remove both classes, add the correct one
+                document.body.classList.remove('lang-en', 'lang-de');
+                document.body.classList.add('lang-' + lang);
+                
+                // Update button states
+                document.querySelectorAll('.lang-btn').forEach(function(b) {
+                    b.classList.remove('active');
+                });
+                this.classList.add('active');
+            };
+        });
+
+        // Print: show all tabs
+        window.addEventListener('beforeprint', function() {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('active'));
+        });
+    </script>
+</body>
+</html>

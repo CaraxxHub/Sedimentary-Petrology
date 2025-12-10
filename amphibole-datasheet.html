@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amphibole (Hornblende) | Mineral Data Sheet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root { --color-primary: #2c3e50; --color-accent: #1b5e20; --color-bg: #faf9f7; --color-card: #ffffff; --color-text: #2c3e50; --color-text-muted: #6b7280; --color-border: #e5e2dc; --color-table-header: #f5f3ef; --color-ppl: #e8d4a8; --color-xpl: #a8c8e8; --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07); --radius: 8px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Source Sans 3', sans-serif; background: var(--color-bg); color: var(--color-text); line-height: 1.6; font-size: 15px; }
+        .en { display: inline; } .de { display: none; }
+        body.lang-de .en { display: none !important; } body.lang-de .de { display: inline !important; }
+        body.lang-en .en { display: inline !important; } body.lang-en .de { display: none !important; }
+        .header { background: linear-gradient(135deg, #388e3c 0%, #1b5e20 100%); color: white; padding: 2rem; position: relative; }
+        .header-content { max-width: 1200px; margin: 0 auto; }
+        .mineral-badge { display: inline-block; background: var(--color-accent); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.75rem; }
+        .mineral-name { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .mineral-formula { font-family: 'JetBrains Mono', monospace; font-size: 1rem; opacity: 0.9; margin-bottom: 1rem; }
+        .header-meta { display: flex; gap: 2rem; flex-wrap: wrap; font-size: 0.9rem; opacity: 0.85; }
+        .meta-item { display: flex; align-items: center; gap: 0.5rem; }
+        .meta-label { opacity: 0.7; }
+        .lang-toggle { position: absolute; top: 2rem; right: 2rem; display: flex; background: rgba(255,255,255,0.1); border-radius: 6px; overflow: hidden; }
+        .lang-btn { padding: 0.5rem 1rem; border: none; background: transparent; color: white; cursor: pointer; font-family: inherit; font-size: 0.85rem; font-weight: 500; }
+        .lang-btn.active { background: var(--color-accent); }
+        .main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .nav-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--color-border); }
+        .nav-tab { padding: 0.75rem 1.25rem; border: none; background: transparent; color: var(--color-text-muted); cursor: pointer; font-family: inherit; font-size: 0.9rem; font-weight: 500; border-bottom: 2px solid transparent; margin-bottom: -2px; }
+        .nav-tab:hover { color: var(--color-text); }
+        .nav-tab.active { color: var(--color-accent); border-bottom-color: var(--color-accent); }
+        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .card { background: var(--color-card); border-radius: var(--radius); box-shadow: var(--shadow-md); padding: 1.5rem; margin-bottom: 1.5rem; }
+        .card-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: var(--color-primary); display: flex; align-items: center; gap: 0.5rem; }
+        .card-title::before { content: ''; width: 4px; height: 1.25rem; background: var(--color-accent); border-radius: 2px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        @media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .data-table th, .data-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--color-border); }
+        .data-table th { background: var(--color-table-header); font-weight: 600; color: var(--color-primary); font-size: 0.8rem; text-transform: uppercase; }
+        .optical-section { border-left: 4px solid var(--color-ppl); padding-left: 1rem; margin-bottom: 1.5rem; }
+        .optical-section.xpl { border-left-color: var(--color-xpl); }
+        .optical-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .optical-label.ppl { color: #8b6914; }
+        .optical-label.xpl { color: #1e6091; }
+        .image-placeholder { background: linear-gradient(135deg, #f0ede8 0%, #e5e2dc 100%); border: 2px dashed var(--color-border); border-radius: var(--radius); padding: 2rem; text-align: center; color: var(--color-text-muted); min-height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .image-placeholder-ref { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; background: rgba(0,0,0,0.05); padding: 0.25rem 0.5rem; border-radius: 4px; margin-top: 0.5rem; }
+        .stability-bar { display: flex; align-items: center; gap: 0.75rem; margin: 0.5rem 0; }
+        .stability-track { flex: 1; height: 8px; background: var(--color-border); border-radius: 4px; overflow: hidden; }
+        .stability-fill { height: 100%; border-radius: 4px; }
+        .stability-fill.high { background: linear-gradient(90deg, #4ade80, #22c55e); }
+        .stability-fill.moderate { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+        .stability-fill.low { background: linear-gradient(90deg, #f87171, #ef4444); }
+        .stability-label { font-size: 0.8rem; font-weight: 500; min-width: 80px; }
+        .stability-value { font-size: 0.8rem; color: var(--color-text-muted); min-width: 70px; text-align: right; }
+        .tip-box { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: var(--radius); padding: 1rem 1.25rem; margin-top: 1rem; border-left: 4px solid #f59e0b; }
+        .tip-box-title { font-weight: 600; font-size: 0.85rem; color: #92400e; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .tip-box-content { font-size: 0.85rem; color: #78350f; }
+        .pleochroism-demo { display: flex; gap: 1rem; margin: 1rem 0; justify-content: center; }
+        .pleo-box { width: 80px; height: 60px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+        .cleavage-diagram { display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0; }
+        .cleavage-box { text-align: center; }
+        .cleavage-icon { width: 80px; height: 80px; border: 3px solid var(--color-accent); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 600; margin-bottom: 0.5rem; transform: rotate(45deg); }
+        .cleavage-icon span { transform: rotate(-45deg); }
+        .footer { text-align: center; padding: 2rem; color: var(--color-text-muted); font-size: 0.8rem; border-top: 1px solid var(--color-border); margin-top: 2rem; }
+        .footer-logo { font-family: 'Playfair Display', serif; font-weight: 600; color: var(--color-primary); }
+    </style>
+</head>
+<body class="lang-en">
+    <header class="header">
+        <div class="header-content">
+            <div class="mineral-badge"><span class="en">Inosilicate / Double Chain</span><span class="de">Inosilikat / Doppelkette</span></div>
+            <h1 class="mineral-name">Amphibole <span style="font-size: 1.5rem; opacity: 0.8;">(Hornblende)</span></h1>
+            <div class="mineral-formula">(Ca,Na)<sub>2</sub>(Mg,Fe,Al)<sub>5</sub>(Si,Al)<sub>8</sub>O<sub>22</sub>(OH)<sub>2</sub></div>
+            <div class="header-meta">
+                <div class="meta-item"><span class="meta-label"><span class="en">Crystal System:</span><span class="de">Kristallsystem:</span></span> <span class="en">Monoclinic</span><span class="de">Monoklin</span></div>
+                <div class="meta-item"><span class="meta-label"><span class="en">Hardness:</span><span class="de">Härte:</span></span> 5–6 (Mohs)</div>
+                <div class="meta-item"><span class="meta-label"><span class="en">Density:</span><span class="de">Dichte:</span></span> 3.0–3.5 g/cm³</div>
+                <div class="meta-item"><span class="meta-label"><span class="en">Cleavage:</span><span class="de">Spaltbarkeit:</span></span> <strong><span class="en">2 sets at 56°/124°</span><span class="de">2 Scharen bei 56°/124°</span></strong></div>
+            </div>
+        </div>
+        <div class="lang-toggle">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="de">DE</button>
+        </div>
+    </header>
+
+    <main class="main">
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-tab="optical"><span class="en">Optical Properties</span><span class="de">Optische Eigenschaften</span></button>
+            <button class="nav-tab" data-tab="occurrence"><span class="en">Occurrence</span><span class="de">Vorkommen</span></button>
+            <button class="nav-tab" data-tab="stability"><span class="en">Stability</span><span class="de">Stabilität</span></button>
+            <button class="nav-tab" data-tab="recognition"><span class="en">Recognition</span><span class="de">Erkennung</span></button>
+        </nav>
+
+        <section class="tab-content active" id="optical">
+            <div class="grid-2">
+                <div class="card">
+                    <h2 class="card-title"><span class="en">Plane-Polarized Light (PPL)</span><span class="de">Linear polarisiertes Licht (PPL)</span></h2>
+                    <div class="optical-section">
+                        <div class="optical-label ppl">PPL</div>
+                        <table class="data-table">
+                            <tr><td><span class="en">Relief</span><span class="de">Relief</span></td><td><strong><span class="en">High (n = 1.61–1.73)</span><span class="de">Hoch (n = 1,61–1,73)</span></strong></td></tr>
+                            <tr><td><span class="en">Color</span><span class="de">Farbe</span></td><td><strong><span class="en">Green to brown (hornblende typically green-brown)</span><span class="de">Grün bis braun (Hornblende typisch grün-braun)</span></strong></td></tr>
+                            <tr><td><span class="en">Pleochroism</span><span class="de">Pleochroismus</span></td><td><strong><span class="en">Strong: green ↔ yellow-green ↔ brown</span><span class="de">Stark: grün ↔ gelb-grün ↔ braun</span></strong></td></tr>
+                            <tr><td><span class="en">Habit</span><span class="de">Habitus</span></td><td><span class="en">Elongated prismatic; diamond-shaped cross-section</span><span class="de">Elongiert prismatisch; rautenförmiger Querschnitt</span></td></tr>
+                            <tr><td><span class="en">Cleavage</span><span class="de">Spaltbarkeit</span></td><td><strong><span class="en">2 sets at 56°/124° (DIAGNOSTIC)</span><span class="de">2 Scharen bei 56°/124° (DIAGNOSTISCH)</span></strong></td></tr>
+                        </table>
+                    </div>
+                    
+                    <h3 style="font-size: 0.9rem; margin: 1rem 0 0.5rem; color: var(--color-primary);"><span class="en">Pleochroism Scheme</span><span class="de">Pleochroismus-Schema</span></h3>
+                    <div class="pleochroism-demo">
+                        <div class="pleo-box" style="background: #2e7d32;">X</div>
+                        <div class="pleo-box" style="background: #689f38;">Y</div>
+                        <div class="pleo-box" style="background: #8d6e63;">Z</div>
+                    </div>
+                    <p style="text-align: center; font-size: 0.8rem; color: var(--color-text-muted);"><span class="en">X = dark green | Y = yellow-green | Z = brown/olive</span><span class="de">X = dunkelgrün | Y = gelb-grün | Z = braun/oliv</span></p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title"><span class="en">Cross-Polarized Light (XPL)</span><span class="de">Gekreuzt polarisiertes Licht (XPL)</span></h2>
+                    <div class="optical-section xpl">
+                        <div class="optical-label xpl">XPL</div>
+                        <table class="data-table">
+                            <tr><td><span class="en">Birefringence</span><span class="de">Doppelbrechung</span></td><td><span class="en">Moderate (δ = 0.014–0.026)</span><span class="de">Mäßig (δ = 0,014–0,026)</span></td></tr>
+                            <tr><td><span class="en">Interference Colors</span><span class="de">Interferenzfarben</span></td><td><span class="en">Upper 1st to mid-2nd order</span><span class="de">Obere 1. bis mittlere 2. Ordnung</span></td></tr>
+                            <tr><td><span class="en">Extinction</span><span class="de">Auslöschung</span></td><td><strong><span class="en">Inclined (12–34°)</span><span class="de">Schief (12–34°)</span></strong></td></tr>
+                            <tr><td><span class="en">Twinning</span><span class="de">Verzwillingung</span></td><td><span class="en">Simple twins common</span><span class="de">Einfache Zwillinge häufig</span></td></tr>
+                            <tr><td><span class="en">Optical Character</span><span class="de">Optischer Charakter</span></td><td><span class="en">Biaxial (−), 2V = 52–85°</span><span class="de">Biaxial (−), 2V = 52–85°</span></td></tr>
+                        </table>
+                    </div>
+                    
+                    <h3 style="font-size: 0.9rem; margin: 1rem 0 0.5rem; color: var(--color-primary);"><span class="en">Diagnostic Cleavage Angle</span><span class="de">Diagnostischer Spaltwinkel</span></h3>
+                    <div class="cleavage-diagram">
+                        <div class="cleavage-box">
+                            <div class="cleavage-icon"><span>56°/124°</span></div>
+                            <div style="font-size: 0.8rem; font-weight: 600;"><span class="en">AMPHIBOLE</span><span class="de">AMPHIBOL</span></div>
+                            <div style="font-size: 0.75rem; color: var(--color-text-muted);"><span class="en">Diamond shape</span><span class="de">Rautenform</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-box-title"><span>💡</span> <span class="en">Key Recognition</span><span class="de">Schlüsselerkennung</span></div>
+                <div class="tip-box-content"><span class="en"><strong>56°/124° cleavage angle + strong green-brown pleochroism + elongated prismatic habit</strong> is the diagnostic combination. The diamond-shaped cross-section with cleavage at ~60°/120° immediately distinguishes hornblende from pyroxene (~90° cleavage). Strong color and pleochroism help confirm identification.</span><span class="de"><strong>56°/124° Spaltwinkel + starker grün-brauner Pleochroismus + elongiert prismatischer Habitus</strong> ist die diagnostische Kombination. Der rautenförmige Querschnitt mit Spaltbarkeit bei ~60°/120° unterscheidet Hornblende sofort von Pyroxen (~90° Spaltbarkeit). Starke Farbe und Pleochroismus helfen bei der Bestätigung.</span></div>
+            </div>
+        </section>
+
+        <section class="tab-content" id="occurrence">
+            <div class="card">
+                <h2 class="card-title"><span class="en">Sources & Provenance</span><span class="de">Quellen & Provenance</span></h2>
+                <div class="grid-2">
+                    <div>
+                        <h3 style="font-size: 1rem; margin-bottom: 0.75rem; color: var(--color-primary);"><span class="en">Primary Sources</span><span class="de">Primäre Quellen</span></h3>
+                        <ul style="margin-left: 1.25rem; font-size: 0.9rem; color: var(--color-text-muted);">
+                            <li><span class="en"><strong>Intermediate igneous:</strong> diorite, granodiorite, andesite</span><span class="de"><strong>Intermediäre Magmatite:</strong> Diorit, Granodiorit, Andesit</span></li>
+                            <li><span class="en"><strong>Amphibolite facies metamorphics</strong></span><span class="de"><strong>Amphibolit-Fazies Metamorphite</strong></span></li>
+                            <li><span class="en"><strong>Some mafic rocks:</strong> gabbro, basalt</span><span class="de"><strong>Einige mafische Gesteine:</strong> Gabbro, Basalt</span></li>
+                            <li><span class="en"><strong>Volcanic arc rocks</strong></span><span class="de"><strong>Vulkanbogengesteine</strong></span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1rem; margin-bottom: 0.75rem; color: var(--color-primary);"><span class="en">Common Amphibole Types</span><span class="de">Häufige Amphiboltypen</span></h3>
+                        <ul style="margin-left: 1.25rem; font-size: 0.9rem; color: var(--color-text-muted);">
+                            <li><span class="en"><strong>Hornblende</strong> — most common (calc-alkaline)</span><span class="de"><strong>Hornblende</strong> — am häufigsten (kalk-alkalisch)</span></li>
+                            <li><span class="en"><strong>Actinolite</strong> — greenschist facies indicator</span><span class="de"><strong>Aktinolith</strong> — Grünschiefer-Fazies Indikator</span></li>
+                            <li><span class="en"><strong>Tremolite</strong> — metamorphosed carbonates</span><span class="de"><strong>Tremolit</strong> — metamorphe Karbonate</span></li>
+                            <li><span class="en"><strong>Glaucophane</strong> — blueschist facies (blue!)</span><span class="de"><strong>Glaukophan</strong> — Blauschiefer-Fazies (blau!)</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-box-title"><span>💡</span> <span class="en">Provenance Significance</span><span class="de">Provenance-Bedeutung</span></div>
+                <div class="tip-box-content"><span class="en">Abundant hornblende indicates erosion of <strong>intermediate to mafic igneous or amphibolite-facies metamorphic terranes</strong>. Hornblende is slightly more stable than pyroxene but still requires relatively rapid transport and burial to survive. Green actinolite with epidote suggests greenschist-facies sources. Blue glaucophane is diagnostic of high-pressure metamorphism (subduction zones).</span><span class="de">Reichlich Hornblende zeigt Erosion von <strong>intermediären bis mafischen magmatischen oder Amphibolit-Fazies metamorphen Terranen</strong> an. Hornblende ist etwas stabiler als Pyroxen, erfordert aber immer noch relativ schnellen Transport und Versenkung zum Überleben. Grüner Aktinolith mit Epidot deutet auf Grünschiefer-Fazies Quellen hin. Blauer Glaukophan ist diagnostisch für Hochdruck-Metamorphose (Subduktionszonen).</span></div>
+            </div>
+        </section>
+
+        <section class="tab-content" id="stability">
+            <div class="card">
+                <h2 class="card-title"><span class="en">Low to Moderate Stability</span><span class="de">Niedrige bis mäßige Stabilität</span></h2>
+                <div class="stability-bar">
+                    <span class="stability-label"><span class="en">Chemical</span><span class="de">Chemisch</span></span>
+                    <div class="stability-track"><div class="stability-fill low" style="width: 35%;"></div></div>
+                    <span class="stability-value"><span class="en">Low</span><span class="de">Niedrig</span></span>
+                </div>
+                <div class="stability-bar">
+                    <span class="stability-label"><span class="en">Mechanical</span><span class="de">Mechanisch</span></span>
+                    <div class="stability-track"><div class="stability-fill moderate" style="width: 50%;"></div></div>
+                    <span class="stability-value"><span class="en">Moderate</span><span class="de">Mäßig</span></span>
+                </div>
+                <div class="stability-bar">
+                    <span class="stability-label"><span class="en">Diagenetic</span><span class="de">Diagenetisch</span></span>
+                    <div class="stability-track"><div class="stability-fill low" style="width: 30%;"></div></div>
+                    <span class="stability-value"><span class="en">Low</span><span class="de">Niedrig</span></span>
+                </div>
+                
+                <p style="font-size: 0.9rem; color: var(--color-text-muted); margin-top: 1rem;"><span class="en">Amphibole is unstable in the Goldich sequence — slightly more resistant than pyroxene but still dissolves readily during weathering and burial diagenesis. Cleavage provides planes for mechanical weakness. OH-bearing structure makes it susceptible to dehydration and alteration.</span><span class="de">Amphibol ist in der Goldich-Sequenz instabil — etwas resistenter als Pyroxen, löst sich aber dennoch leicht während Verwitterung und Versenkungsdiagenese. Spaltbarkeit bietet Flächen für mechanische Schwäche. OH-haltige Struktur macht ihn anfällig für Dehydratation und Alteration.</span></p>
+            </div>
+        </section>
+
+        <section class="tab-content" id="recognition">
+            <div class="card">
+                <h2 class="card-title"><span class="en">Amphibole vs. Pyroxene — Summary</span><span class="de">Amphibol vs. Pyroxen — Zusammenfassung</span></h2>
+                <table class="data-table">
+                    <thead><tr><th><span class="en">Feature</span><span class="de">Merkmal</span></th><th><span class="en">AMPHIBOLE</span><span class="de">AMPHIBOL</span></th><th><span class="en">PYROXENE</span><span class="de">PYROXEN</span></th></tr></thead>
+                    <tbody>
+                        <tr><td><strong><span class="en">Cleavage Angle</span><span class="de">Spaltwinkel</span></strong></td><td><strong>56°/124°</strong></td><td><strong>87°/93° (~90°)</strong></td></tr>
+                        <tr><td><span class="en">Basal Section</span><span class="de">Basalschnitt</span></td><td><span class="en">Diamond/rhombic (6-sided)</span><span class="de">Rauten/rhombisch (6-seitig)</span></td><td><span class="en">Nearly square (8-sided)</span><span class="de">Nahezu quadratisch (8-seitig)</span></td></tr>
+                        <tr><td><span class="en">Habit</span><span class="de">Habitus</span></td><td><span class="en">Elongated prisms</span><span class="de">Elongierte Prismen</span></td><td><span class="en">Short, stubby prisms</span><span class="de">Kurze, gedrungene Prismen</span></td></tr>
+                        <tr><td><span class="en">Extinction (long sect.)</span><span class="de">Auslöschung (Längsschn.)</span></td><td><span class="en">12–34°</span><span class="de">12–34°</span></td><td><span class="en">35–48°</span><span class="de">35–48°</span></td></tr>
+                        <tr><td><span class="en">Pleochroism</span><span class="de">Pleochroismus</span></td><td><strong><span class="en">Strong (green-brown)</span><span class="de">Stark (grün-braun)</span></strong></td><td><span class="en">Weak (usually)</span><span class="de">Schwach (gewöhnlich)</span></td></tr>
+                        <tr><td><span class="en">Color in PPL</span><span class="de">Farbe in PPL</span></td><td><span class="en">Green-brown</span><span class="de">Grün-braun</span></td><td><span class="en">Pale green/brown/colorless</span><span class="de">Hellgrün/braun/farblos</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-box-title"><span>🎯</span> <span class="en">Best Practice</span><span class="de">Beste Praxis</span></div>
+                <div class="tip-box-content"><span class="en">For amphibole identification: (1) <strong>Find a basal section</strong> and measure cleavage angle — 56°/124° is diagnostic; (2) Check for strong pleochroism (green to brown); (3) Note elongated prismatic habit; (4) Verify inclined extinction (12–34°). <strong>The 56°/124° cleavage angle is the single most reliable criterion to distinguish amphibole from pyroxene.</strong></span><span class="de">Für Amphibol-Identifikation: (1) <strong>Basalschnitt finden</strong> und Spaltwinkel messen — 56°/124° ist diagnostisch; (2) Auf starken Pleochroismus prüfen (grün bis braun); (3) Elongiert prismatischen Habitus notieren; (4) Schiefe Auslöschung verifizieren (12–34°). <strong>Der 56°/124° Spaltwinkel ist das zuverlässigste Einzelkriterium zur Unterscheidung von Amphibol und Pyroxen.</strong></span></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer"><div class="footer-logo">GeoZentrum Nordbayern</div><div>Friedrich-Alexander-Universität Erlangen-Nürnberg</div></footer>
+
+    <script>
+        document.querySelectorAll('.nav-tab').forEach(function(tab) { tab.onclick = function() { document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); }); document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); }); this.classList.add('active'); document.getElementById(this.getAttribute('data-tab')).classList.add('active'); }; });
+        document.querySelectorAll('.lang-btn').forEach(function(btn) { btn.onclick = function() { var lang = this.getAttribute('data-lang'); document.body.classList.remove('lang-en', 'lang-de'); document.body.classList.add('lang-' + lang); document.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.remove('active'); }); this.classList.add('active'); }; });
+    </script>
+</body>
+</html>

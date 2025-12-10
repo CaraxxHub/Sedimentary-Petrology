@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Feldspar | Mineral Data Sheet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #2c3e50;
+            --color-accent: #c2785c;
+            --color-accent-light: #e8a88a;
+            --color-bg: #faf9f7;
+            --color-card: #ffffff;
+            --color-text: #2c3e50;
+            --color-text-muted: #6b7280;
+            --color-border: #e5e2dc;
+            --color-table-header: #f5f3ef;
+            --color-ppl: #e8d4a8;
+            --color-xpl: #a8c8e8;
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -1px rgba(0,0,0,0.04);
+            --radius: 8px;
+            --transition: 0.2s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        /* LANGUAGE SWITCHING */
+        .en { display: inline; }
+        .de { display: none; }
+        body.lang-de .en { display: none !important; }
+        body.lang-de .de { display: inline !important; }
+        body.lang-en .en { display: inline !important; }
+        body.lang-en .de { display: none !important; }
+
+        .header {
+            background: linear-gradient(135deg, #8b4513 0%, #5d2e0c 100%);
+            color: white;
+            padding: 2rem 2rem 1.5rem;
+            position: relative;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mineral-badge {
+            display: inline-block;
+            background: var(--color-accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .mineral-name {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .mineral-formula {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meta-label { opacity: 0.7; }
+
+        .lang-toggle {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .lang-btn.active { background: var(--color-accent); }
+        .lang-btn:hover:not(.active) { background: rgba(255,255,255,0.1); }
+
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .nav-tab {
+            padding: 0.75rem 1.25rem;
+            border: none;
+            background: transparent;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: var(--transition);
+        }
+
+        .nav-tab:hover { color: var(--color-text); }
+        .nav-tab.active {
+            color: var(--color-accent);
+            border-bottom-color: var(--color-accent);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--color-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-title::before {
+            content: '';
+            width: 4px;
+            height: 1.25rem;
+            background: var(--color-accent);
+            border-radius: 2px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .data-table th, .data-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .data-table th {
+            background: var(--color-table-header);
+            font-weight: 600;
+            color: var(--color-primary);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table tr:hover td { background: var(--color-table-header); }
+
+        .optical-section {
+            border-left: 4px solid var(--color-ppl);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .optical-section.xpl { border-left-color: var(--color-xpl); }
+
+        .optical-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        .optical-label.ppl { color: #8b6914; }
+        .optical-label.xpl { color: #1e6091; }
+
+        .image-placeholder {
+            background: linear-gradient(135deg, #f0ede8 0%, #e5e2dc 100%);
+            border: 2px dashed var(--color-border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            color: var(--color-text-muted);
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .image-placeholder-icon { font-size: 2rem; opacity: 0.5; }
+        .image-placeholder-text { font-size: 0.85rem; max-width: 280px; }
+        .image-placeholder-ref {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            background: rgba(0,0,0,0.05);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+        }
+
+        .stability-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin: 0.5rem 0;
+        }
+
+        .stability-track {
+            flex: 1;
+            height: 8px;
+            background: var(--color-border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .stability-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+        .stability-fill.high { background: linear-gradient(90deg, #4ade80, #22c55e); }
+        .stability-fill.moderate { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+        .stability-fill.low { background: linear-gradient(90deg, #f87171, #ef4444); }
+
+        .stability-label { font-size: 0.8rem; font-weight: 500; min-width: 80px; }
+        .stability-value { font-size: 0.8rem; color: var(--color-text-muted); min-width: 70px; text-align: right; }
+
+        .occurrence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .occurrence-card {
+            background: var(--color-table-header);
+            border-radius: var(--radius);
+            padding: 1rem;
+            border-left: 3px solid var(--color-accent);
+        }
+
+        .occurrence-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--color-primary);
+        }
+
+        .occurrence-desc {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .occurrence-features { font-size: 0.8rem; color: var(--color-text); }
+        .occurrence-features strong { color: var(--color-accent); }
+
+        .tip-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            margin-top: 1rem;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .tip-box-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #92400e;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tip-box-content { font-size: 0.85rem; color: #78350f; }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            margin-top: 1rem;
+            border-left: 4px solid #ef4444;
+        }
+
+        .warning-box-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #991b1b;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .warning-box-content { font-size: 0.85rem; color: #7f1d1d; }
+
+        .twinning-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .twin-card {
+            background: var(--color-table-header);
+            border-radius: var(--radius);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .twin-card h4 {
+            font-size: 0.9rem;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .twin-card p {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--color-text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--color-border);
+            margin-top: 2rem;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        @media print {
+            .nav-tabs, .lang-toggle { display: none; }
+            .tab-content { display: block !important; }
+            .card { box-shadow: none; border: 1px solid var(--color-border); }
+        }
+    </style>
+</head>
+<body class="lang-en">
+    <header class="header">
+        <div class="header-content">
+            <div class="mineral-badge"><span class="en">Framework Grain</span><span class="de">Gerüstkorn</span></div>
+            <h1 class="mineral-name">K-Feldspar</h1>
+            <div class="mineral-formula">KAlSi<sub>3</sub>O<sub>8</sub></div>
+            <div class="header-meta">
+                <div class="meta-item">
+                    <span class="meta-label"><span class="en">Crystal System:</span><span class="de">Kristallsystem:</span></span>
+                    <span><span class="en">Monoclinic / Triclinic</span><span class="de">Monoklin / Triklin</span></span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label"><span class="en">Hardness:</span><span class="de">Härte:</span></span>
+                    <span>6 (Mohs)</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label"><span class="en">Density:</span><span class="de">Dichte:</span></span>
+                    <span>2.55–2.63 g/cm³</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label"><span class="en">Cleavage:</span><span class="de">Spaltbarkeit:</span></span>
+                    <span><span class="en">Perfect {001}, good {010} at ~90°</span><span class="de">Perfekt {001}, gut {010} bei ~90°</span></span>
+                </div>
+            </div>
+        </div>
+        <div class="lang-toggle">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="de">DE</button>
+        </div>
+    </header>
+
+    <main class="main">
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-tab="optical"><span class="en">Optical Properties</span><span class="de">Optische Eigenschaften</span></button>
+            <button class="nav-tab" data-tab="varieties"><span class="en">Varieties & Twinning</span><span class="de">Varietäten & Verzwillingung</span></button>
+            <button class="nav-tab" data-tab="stability"><span class="en">Stability & Diagenesis</span><span class="de">Stabilität & Diagenese</span></button>
+            <button class="nav-tab" data-tab="recognition"><span class="en">Recognition</span><span class="de">Erkennung</span></button>
+        </nav>
+
+        <!-- OPTICAL PROPERTIES TAB -->
+        <section class="tab-content active" id="optical">
+            <div class="grid-2">
+                <div class="card">
+                    <h2 class="card-title"><span class="en">Plane-Polarized Light (PPL)</span><span class="de">Linear polarisiertes Licht (PPL)</span></h2>
+                    <div class="optical-section">
+                        <div class="optical-label ppl">PPL</div>
+                        <table class="data-table">
+                            <tr>
+                                <td><span class="en">Relief</span><span class="de">Relief</span></td>
+                                <td><span class="en">Low (n = 1.518–1.526)</span><span class="de">Niedrig (n = 1,518–1,526)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="en">Color</span><span class="de">Farbe</span></td>
+                                <td><span class="en">Colorless; often cloudy/turbid from alteration</span><span class="de">Farblos; oft trüb durch Alteration</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="en">Pleochroism</span><span class="de">Pleochroismus</span></td>
+                                <td><span class="en">None</span><span class="de">Keiner</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="en">Cleavage</span><span class="de">Spaltbarkeit</span></td>
+                                <td><span class="en">Two sets at ~90° (often visible)</span><span class="de">Zwei Scharen bei ~90° (oft sichtbar)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="en">Alteration</span><span class="de">Alteration</span></td>
+                                <td><span class="en">Sericite, kaolinite ("dusty" appearance)</span><span class="de">Serizit, Kaolinit ("staubiges" Aussehen)</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="image-placeholder">
+                        <div class="image-placeholder-icon">🔬</div>
+                        <div class="image-placeholder-text"><span class="en">PPL: K-feldspar showing cloudy alteration, visible cleavage traces</span><span class="de">PPL: K-Feldspat mit trüber Alteration, sichtbare Spaltspuren</span></div>
+                        <div class="image-placeholder-ref">AAPG Atlas: Plate 5-6</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title"><span class="en">Cross-Polarized Light (XPL)</span><span class="de">Gekreuzt polarisiertes Licht (XPL)</span></h2>
+                    <div class="optical-section xpl">
+                        <div class="optical-label xpl">XPL</div>
+                        <table class="data-table">
+                            <tr>
+                                <td><span class="en">Birefringence</span><span class="de">Doppelbrechung</span></td>
+                                <td><span class="en">Low (δ = 0.005–0.008)</span><span class="de">Niedrig (δ = 0,005–0,008)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="en">Interference Colors</span><span class="de">Interferenzfarben</span></td>
+                                <td><span class="en">1st order gray (lower than quartz)</span><span class="de">1. Ordnung grau (niedriger als Quarz)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="en">Extinction</span><span class="de">Auslöschung</span></td>
+                                <td><span class="en">Inclined (5–13°) or straight</span><span class="de">Schief (5–13°) oder gerade</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="en">Twinning</span><span class="de">Verzwillingung</span></td>
+                                <td><span class="en">Carlsbad (simple), tartan/cross-hatch (microcline)</span><span class="de">Karlsbader (einfach), Tartan/Gitter (Mikroklin)</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="en">Optical Character</span><span class="de">Optischer Charakter</span></td>
+                                <td><span class="en">Biaxial (−), 2V = 35–80°</span><span class="de">Biaxial (−), 2V = 35–80°</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="image-placeholder">
+                        <div class="image-placeholder-icon">🔬</div>
+                        <div class="image-placeholder-text"><span class="en">XPL: K-feldspar with Carlsbad twinning</span><span class="de">XPL: K-Feldspat mit Karlsbader Verzwillingung</span></div>
+                        <div class="image-placeholder-ref">AAPG Atlas: Plate 5-6</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-box-title">
+                    <span>💡</span>
+                    <span><span class="en">Staining Tip</span><span class="de">Färbe-Tipp</span></span>
+                </div>
+                <div class="tip-box-content"><span class="en">K-feldspar stains yellow with sodium cobaltinitrite solution, while plagioclase remains unstained. This is the most reliable method to distinguish K-feldspar from plagioclase in thin section when twinning is absent or unclear.</span><span class="de">K-Feldspat färbt sich gelb mit Natriumkobaltinitrit-Lösung, während Plagioklas ungefärbt bleibt. Dies ist die zuverlässigste Methode zur Unterscheidung von K-Feldspat und Plagioklas im Dünnschliff, wenn Verzwillingung fehlt oder unklar ist.</span></div>
+            </div>
+        </section>
+
+        <!-- VARIETIES & TWINNING TAB -->
+        <section class="tab-content" id="varieties">
+            <div class="card">
+                <h2 class="card-title"><span class="en">K-Feldspar Varieties</span><span class="de">K-Feldspat-Varietäten</span></h2>
+                <p style="color: var(--color-text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;"><span class="en">K-feldspar polymorphs differ in structural state (Al-Si ordering) and symmetry. Recognition is essential for provenance interpretation.</span><span class="de">K-Feldspat-Polymorphe unterscheiden sich im Strukturzustand (Al-Si-Ordnung) und Symmetrie. Erkennung ist essentiell für Provenance-Interpretation.</span></p>
+
+                <div class="occurrence-grid">
+                    <div class="occurrence-card">
+                        <div class="occurrence-title"><span class="en">Orthoclase</span><span class="de">Orthoklas</span></div>
+                        <div class="occurrence-desc"><span class="en">Monoclinic, intermediate ordering</span><span class="de">Monoklin, mittlere Ordnung</span></div>
+                        <div class="occurrence-features">
+                            <strong><span class="en">Sources:</span><span class="de">Quellen:</span></strong> <span class="en">Granites, syenites, high-T metamorphics</span><span class="de">Granite, Syenite, Hochtemperatur-Metamorphite</span><br>
+                            <strong><span class="en">Twinning:</span><span class="de">Verzwillingung:</span></strong> <span class="en">Simple Carlsbad twins; no tartan pattern</span><span class="de">Einfache Karlsbader Zwillinge; kein Tartanmuster</span><br>
+                            <strong><span class="en">Recognition:</span><span class="de">Erkennung:</span></strong> <span class="en">Often turbid; Carlsbad twin = 2 halves with different extinction</span><span class="de">Oft trüb; Karlsbader Zwilling = 2 Hälften mit unterschiedlicher Auslöschung</span>
+                        </div>
+                    </div>
+
+                    <div class="occurrence-card">
+                        <div class="occurrence-title"><span class="en">Microcline</span><span class="de">Mikroklin</span></div>
+                        <div class="occurrence-desc"><span class="en">Triclinic, maximum ordering</span><span class="de">Triklin, maximale Ordnung</span></div>
+                        <div class="occurrence-features">
+                            <strong><span class="en">Sources:</span><span class="de">Quellen:</span></strong> <span class="en">Pegmatites, slowly-cooled granites, gneisses</span><span class="de">Pegmatite, langsam gekühlte Granite, Gneise</span><br>
+                            <strong><span class="en">Twinning:</span><span class="de">Verzwillingung:</span></strong> <span class="en">Diagnostic tartan/cross-hatch pattern (albite + pericline twins)</span><span class="de">Diagnostisches Tartan-/Gittermuster (Albit- + Periklin-Zwillinge)</span><br>
+                            <strong><span class="en">Recognition:</span><span class="de">Erkennung:</span></strong> <span class="en">"Plaid" or "tartan" pattern in XPL — diagnostic!</span><span class="de">"Schottenmuster" oder "Tartan" in XPL — diagnostisch!</span>
+                        </div>
+                    </div>
+
+                    <div class="occurrence-card">
+                        <div class="occurrence-title"><span class="en">Sanidine</span><span class="de">Sanidin</span></div>
+                        <div class="occurrence-desc"><span class="en">Monoclinic, disordered (high-T form)</span><span class="de">Monoklin, ungeordnet (Hochtemperatur-Form)</span></div>
+                        <div class="occurrence-features">
+                            <strong><span class="en">Sources:</span><span class="de">Quellen:</span></strong> <span class="en">Volcanic rocks (rhyolite, trachyte, phonolite)</span><span class="de">Vulkanite (Rhyolith, Trachyt, Phonolith)</span><br>
+                            <strong><span class="en">Twinning:</span><span class="de">Verzwillingung:</span></strong> <span class="en">Simple Carlsbad; may show Baveno twins</span><span class="de">Einfacher Karlsbader; kann Baveno-Zwillinge zeigen</span><br>
+                            <strong><span class="en">Recognition:</span><span class="de">Erkennung:</span></strong> <span class="en">Clear, glassy appearance; low 2V (0–40°); euhedral phenocrysts</span><span class="de">Klares, glasiges Aussehen; niedriger 2V (0–40°); idiomorphe Phänokristalle</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title"><span class="en">Twinning Patterns — Key Recognition Feature</span><span class="de">Verzwillingungsmuster — Wichtiges Erkennungsmerkmal</span></h2>
+                <div class="twinning-comparison">
+                    <div class="twin-card">
+                        <h4><span class="en">Carlsbad Twin (Orthoclase/Sanidine)</span><span class="de">Karlsbader Zwilling (Orthoklas/Sanidin)</span></h4>
+                        <div class="image-placeholder" style="min-height: 120px; margin: 0.5rem 0;">
+                            <div class="image-placeholder-text"><span class="en">Simple twin: 2 domains with different extinction angles, divided by single plane</span><span class="de">Einfacher Zwilling: 2 Domänen mit unterschiedlichen Auslöschungswinkeln, getrennt durch einzelne Ebene</span></div>
+                        </div>
+                        <p><span class="en">Composition plane {010}; rotation twin</span><span class="de">Kompositionsebene {010}; Rotationszwilling</span></p>
+                    </div>
+                    <div class="twin-card">
+                        <h4><span class="en">Tartan/Cross-Hatch (Microcline)</span><span class="de">Tartan/Gitter (Mikroklin)</span></h4>
+                        <div class="image-placeholder" style="min-height: 120px; margin: 0.5rem 0;">
+                            <div class="image-placeholder-text"><span class="en">Grid pattern: intersecting albite + pericline twin lamellae creating "plaid"</span><span class="de">Gittermuster: sich kreuzende Albit- + Periklin-Zwillingslamellen erzeugen "Schottenmuster"</span></div>
+                        </div>
+                        <p><span class="en">Diagnostic for microcline — never in orthoclase!</span><span class="de">Diagnostisch für Mikroklin — nie bei Orthoklas!</span></p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <div class="tip-box-title">
+                        <span>💡</span>
+                        <span><span class="en">Provenance Significance</span><span class="de">Provenance-Bedeutung</span></span>
+                    </div>
+                    <div class="tip-box-content"><span class="en">Microcline (tartan twinning) indicates slowly-cooled plutonic or metamorphic sources. Sanidine (clear, low 2V) indicates volcanic sources. Orthoclase is intermediate. The relative abundance of microcline vs. sanidine can help constrain provenance between plutonic and volcanic terranes.</span><span class="de">Mikroklin (Tartan-Verzwillingung) zeigt langsam gekühlte plutonische oder metamorphe Quellen an. Sanidin (klar, niedriger 2V) zeigt vulkanische Quellen an. Orthoklas ist intermediär. Das relative Verhältnis von Mikroklin zu Sanidin kann helfen, die Provenance zwischen plutonischen und vulkanischen Terranen einzugrenzen.</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STABILITY & DIAGENESIS TAB -->
+        <section class="tab-content" id="stability">
+            <div class="grid-2">
+                <div class="card">
+                    <h2 class="card-title"><span class="en">Weathering Resistance</span><span class="de">Verwitterungsresistenz</span></h2>
+
+                    <div class="stability-bar">
+                        <span class="stability-label"><span class="en">Chemical</span><span class="de">Chemisch</span></span>
+                        <div class="stability-track">
+                            <div class="stability-fill moderate" style="width: 55%;"></div>
+                        </div>
+                        <span class="stability-value"><span class="en">Moderate</span><span class="de">Mäßig</span></span>
+                    </div>
+
+                    <div class="stability-bar">
+                        <span class="stability-label"><span class="en">Mechanical</span><span class="de">Mechanisch</span></span>
+                        <div class="stability-track">
+                            <div class="stability-fill moderate" style="width: 50%;"></div>
+                        </div>
+                        <span class="stability-value"><span class="en">Moderate</span><span class="de">Mäßig</span></span>
+                    </div>
+
+                    <table class="data-table" style="margin-top: 1rem;">
+                        <tr>
+                            <th colspan="2"><span class="en">Weathering Behavior</span><span class="de">Verwitterungsverhalten</span></th>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Goldich Stability</span><span class="de">Goldich-Stabilität</span></td>
+                            <td><span class="en">More stable than plagioclase</span><span class="de">Stabiler als Plagioklas</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Weathering Products</span><span class="de">Verwitterungsprodukte</span></td>
+                            <td><span class="en">Kaolinite, illite, dissolved K⁺</span><span class="de">Kaolinit, Illit, gelöstes K⁺</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Mechanical Weakness</span><span class="de">Mechanische Schwäche</span></td>
+                            <td><span class="en">Cleavage planes → preferential breakage</span><span class="de">Spaltebenen → bevorzugter Bruch</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Climate Sensitivity</span><span class="de">Klimasensitivität</span></td>
+                            <td><span class="en">Depleted in humid tropical settings</span><span class="de">Verarmt in humid-tropischen Gebieten</span></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title"><span class="en">Diagenetic Behavior</span><span class="de">Diagenetisches Verhalten</span></h2>
+
+                    <div class="stability-bar">
+                        <span class="stability-label"><span class="en">Dissolution</span><span class="de">Lösung</span></span>
+                        <div class="stability-track">
+                            <div class="stability-fill moderate" style="width: 45%;"></div>
+                        </div>
+                        <span class="stability-value"><span class="en">Susceptible</span><span class="de">Anfällig</span></span>
+                    </div>
+
+                    <div class="stability-bar">
+                        <span class="stability-label"><span class="en">Replacement</span><span class="de">Ersetzung</span></span>
+                        <div class="stability-track">
+                            <div class="stability-fill low" style="width: 35%;"></div>
+                        </div>
+                        <span class="stability-value"><span class="en">Common</span><span class="de">Häufig</span></span>
+                    </div>
+
+                    <div class="stability-bar">
+                        <span class="stability-label"><span class="en">Compaction</span><span class="de">Kompaktion</span></span>
+                        <div class="stability-track">
+                            <div class="stability-fill high" style="width: 80%;"></div>
+                        </div>
+                        <span class="stability-value"><span class="en">Rigid</span><span class="de">Starr</span></span>
+                    </div>
+
+                    <table class="data-table" style="margin-top: 1rem;">
+                        <tr>
+                            <th colspan="2"><span class="en">Diagenetic Features</span><span class="de">Diagenetische Merkmale</span></th>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Albitization</span><span class="de">Albitisierung</span></td>
+                            <td><span class="en">Replacement by albite (Na-metasomatism)</span><span class="de">Ersetzung durch Albit (Na-Metasomatose)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Sericitization</span><span class="de">Serizitisierung</span></td>
+                            <td><span class="en">Fine-grained white mica replacement</span><span class="de">Feinkristalliner Hellglimmer-Ersatz</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Dissolution</span><span class="de">Lösung</span></td>
+                            <td><span class="en">Secondary porosity (moldic pores)</span><span class="de">Sekundäre Porosität (Moldic-Poren)</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Overgrowths</span><span class="de">Anwachssäume</span></td>
+                            <td><span class="en">Authigenic K-feldspar (rare)</span><span class="de">Authigener K-Feldspat (selten)</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <div class="warning-box-title">
+                    <span>⚠️</span>
+                    <span><span class="en">Diagenetic Caution</span><span class="de">Diagenetische Warnung</span></span>
+                </div>
+                <div class="warning-box-content"><span class="en">K-feldspar dissolution creates secondary porosity that may later be filled by cements. Extensive albitization can transform K-feldspar to albite, completely erasing the original K-feldspar signature. In deeply buried sandstones, original feldspar content may be significantly underestimated due to dissolution. Always look for moldic pores with feldspar outlines and grain-shaped secondary porosity.</span><span class="de">K-Feldspat-Lösung erzeugt sekundäre Porosität, die später durch Zemente gefüllt werden kann. Extensive Albitisierung kann K-Feldspat vollständig in Albit umwandeln und das ursprüngliche K-Feldspat-Signal auslöschen. In tief versenkten Sandsteinen kann der ursprüngliche Feldspatgehalt aufgrund von Lösung erheblich unterschätzt werden. Immer nach Moldic-Poren mit Feldspat-Umrissen und kornförmiger Sekundärporosität suchen.</span></div>
+            </div>
+        </section>
+
+        <!-- RECOGNITION TAB -->
+        <section class="tab-content" id="recognition">
+            <div class="card">
+                <h2 class="card-title"><span class="en">Quick Identification Key</span><span class="de">Schnellbestimmungsschlüssel</span></h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th><span class="en">Feature</span><span class="de">Merkmal</span></th>
+                            <th><span class="en">K-Feldspar</span><span class="de">K-Feldspat</span></th>
+                            <th><span class="en">Plagioclase</span><span class="de">Plagioklas</span></th>
+                            <th><span class="en">Quartz</span><span class="de">Quarz</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="en">Cleavage</span><span class="de">Spaltbarkeit</span></td>
+                            <td><span class="en">2 sets at ~90°</span><span class="de">2 Scharen bei ~90°</span></td>
+                            <td><span class="en">2 sets at ~90°</span><span class="de">2 Scharen bei ~90°</span></td>
+                            <td><span class="en">None</span><span class="de">Keine</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Twinning</span><span class="de">Verzwillingung</span></td>
+                            <td><span class="en">Carlsbad, tartan</span><span class="de">Karlsbader, Tartan</span></td>
+                            <td><span class="en">Polysynthetic (lamellar)</span><span class="de">Polysynthetisch (lamellär)</span></td>
+                            <td><span class="en">None visible</span><span class="de">Keine sichtbar</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Alteration</span><span class="de">Alteration</span></td>
+                            <td><span class="en">Cloudy/dusty (sericite)</span><span class="de">Trüb/staubig (Serizit)</span></td>
+                            <td><span class="en">Saussurite, sericite</span><span class="de">Saussurit, Serizit</span></td>
+                            <td><span class="en">Fresh, clean</span><span class="de">Frisch, klar</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Staining</span><span class="de">Färbung</span></td>
+                            <td><span class="en">Yellow (Na-cobaltinitrite)</span><span class="de">Gelb (Na-Kobaltinitrit)</span></td>
+                            <td><span class="en">Red (amaranth) or unstained</span><span class="de">Rot (Amaranth) oder ungefärbt</span></td>
+                            <td><span class="en">Unstained</span><span class="de">Ungefärbt</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="en">Birefringence</span><span class="de">Doppelbrechung</span></td>
+                            <td><span class="en">Very low (< quartz)</span><span class="de">Sehr niedrig (< Quarz)</span></td>
+                            <td><span class="en">Low (similar to K-spar)</span><span class="de">Niedrig (ähnlich K-Feldspat)</span></td>
+                            <td><span class="en">Low (1st order gray)</span><span class="de">Niedrig (1. Ordnung grau)</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title"><span class="en">Distinguishing K-Feldspar from Plagioclase</span><span class="de">Unterscheidung K-Feldspat von Plagioklas</span></h2>
+                <div class="grid-2">
+                    <div>
+                        <h3 style="font-size: 1rem; margin-bottom: 0.75rem; color: var(--color-primary);"><span class="en">Key Criteria</span><span class="de">Schlüsselkriterien</span></h3>
+                        <ul style="margin-left: 1.25rem; color: var(--color-text-muted); font-size: 0.9rem;">
+                            <li><span class="en"><strong>Twinning type:</strong> Plagioclase = polysynthetic lamellae (multiple parallel twins); K-spar = simple Carlsbad or tartan</span><span class="de"><strong>Verzwillingungstyp:</strong> Plagioklas = polysynthetische Lamellen (mehrere parallele Zwillinge); K-Feldspat = einfacher Karlsbader oder Tartan</span></li>
+                            <li><span class="en"><strong>Tartan pattern:</strong> If present → microcline (K-feldspar), never plagioclase</span><span class="de"><strong>Tartanmuster:</strong> Wenn vorhanden → Mikroklin (K-Feldspat), nie Plagioklas</span></li>
+                            <li><span class="en"><strong>Staining:</strong> Most reliable when twinning is absent</span><span class="de"><strong>Färbung:</strong> Am zuverlässigsten, wenn Verzwillingung fehlt</span></li>
+                            <li><span class="en"><strong>Color:</strong> K-feldspar often more turbid; fresh plagioclase often clearer</span><span class="de"><strong>Farbe:</strong> K-Feldspat oft trüber; frischer Plagioklas oft klarer</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1rem; margin-bottom: 0.75rem; color: var(--color-primary);"><span class="en">Common Mistakes</span><span class="de">Häufige Fehler</span></h3>
+                        <ul style="margin-left: 1.25rem; color: var(--color-text-muted); font-size: 0.9rem;">
+                            <li><span class="en"><strong>Untwinned grains:</strong> Without twinning, K-spar and plagioclase look identical — use staining!</span><span class="de"><strong>Unverzwillingte Körner:</strong> Ohne Verzwillingung sehen K-Feldspat und Plagioklas identisch aus — Färbung verwenden!</span></li>
+                            <li><span class="en"><strong>Perthite:</strong> Exsolution lamellae of albite in K-feldspar — don't confuse with polysynthetic twins</span><span class="de"><strong>Perthit:</strong> Entmischungslamellen von Albit in K-Feldspat — nicht mit polysynthetischen Zwillingen verwechseln</span></li>
+                            <li><span class="en"><strong>Very fresh K-spar:</strong> Can look like quartz — check for cleavage</span><span class="de"><strong>Sehr frischer K-Feldspat:</strong> Kann wie Quarz aussehen — auf Spaltbarkeit prüfen</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-box-title">
+                    <span>🎯</span>
+                    <span><span class="en">Best Practice</span><span class="de">Beste Praxis</span></span>
+                </div>
+                <div class="tip-box-content"><span class="en">For untwinned feldspars: (1) Always use stained thin sections when available; (2) If unstained, look for associated grains with diagnostic features; (3) Note that "total feldspar" is more reliable than K-spar/plagioclase ratios in unstained sections; (4) Report whether section was stained in your data.</span><span class="de">Für unverzwillingte Feldspäte: (1) Immer gefärbte Dünnschliffe verwenden, wenn verfügbar; (2) Wenn ungefärbt, nach assoziierten Körnern mit diagnostischen Merkmalen suchen; (3) Beachten, dass "Gesamtfeldspat" zuverlässiger ist als K-Feldspat/Plagioklas-Verhältnisse in ungefärbten Schliffen; (4) Dokumentieren, ob der Schliff gefärbt wurde.</span></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-logo">GeoZentrum Nordbayern</div>
+        <div>Friedrich-Alexander-Universität Erlangen-Nürnberg</div>
+        <div style="margin-top: 0.5rem;"><span class="en">Sandstone Petrography Course Materials</span><span class="de">Sandstein-Petrographie Kursmaterialien</span></div>
+    </footer>
+
+    <script>
+        // Tab navigation
+        document.querySelectorAll('.nav-tab').forEach(function(tab) {
+            tab.onclick = function() {
+                document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
+                document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
+                this.classList.add('active');
+                document.getElementById(this.getAttribute('data-tab')).classList.add('active');
+            };
+        });
+
+        // Language toggle
+        document.querySelectorAll('.lang-btn').forEach(function(btn) {
+            btn.onclick = function() {
+                var lang = this.getAttribute('data-lang');
+                document.body.classList.remove('lang-en', 'lang-de');
+                document.body.classList.add('lang-' + lang);
+                document.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.remove('active'); });
+                this.classList.add('active');
+            };
+        });
+    </script>
+</body>
+</html>
