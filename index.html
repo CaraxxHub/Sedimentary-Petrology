@@ -743,4 +743,17 @@
             loginOverlay.classList.add('hidden');
             expiredOverlay.classList.add('visible');
             document.getElementById('expiredDate').textContent = EXPIRATION_DATE.toLocaleDateString('en-US', {
-                year: 'numeric', month: 'long', day: 'numer
+                year: 'numeric', month: 'long', day: 'numeric'
+            });
+        }
+
+        logoutBtn.addEventListener('click', function() {
+            localStorage.removeItem('sedpetro_session');
+            location.reload();
+        });
+
+        // Initialize on page load
+        checkSession();
+    </script>
+</body>
+</html>
