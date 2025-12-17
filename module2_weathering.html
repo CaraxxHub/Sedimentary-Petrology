@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 2: Weathering & Sand Generation | Sedimentary Petrology</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8B4513;
+            --primary-light: #A0522D;
+            --primary-dark: #6B4423;
+            --secondary: #D2691E;
+            --accent: #DEB887;
+            --background: #FAF8F5;
+            --card-bg: #FFFFFF;
+            --text-primary: #333333;
+            --text-secondary: #5a5a5a;
+            --border: #E0D5C8;
+            --shadow: 0 5px 20px rgba(107, 68, 35, 0.12);
+            --header-gradient: linear-gradient(135deg, #6B4423 0%, #8B4513 50%, #A0522D 100%);
+            --module-gradient: linear-gradient(135deg, #556B2F, #6B8E23);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--background);
+        }
+
+        h1, h2, h3, h4 { font-family: 'Crimson Pro', Georgia, serif; font-weight: 500; }
+        a { color: var(--primary); text-decoration: none; }
+
+        .nav-bar {
+            background: var(--header-gradient);
+            padding: 15px 30px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-brand {
+            color: white;
+            font-size: 1.2em;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Crimson Pro', serif;
+        }
+
+        .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover { background: rgba(255, 255, 255, 0.15); color: white; }
+        .nav-links a.active { background: rgba(255, 255, 255, 0.2); color: white; font-weight: 600; }
+
+        .hero {
+            background: var(--module-gradient);
+            color: white;
+            padding: 130px 30px 70px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+        .hero h1 { font-size: 2.6em; font-weight: 400; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); }
+        .hero-subtitle { font-size: 1.2em; opacity: 0.95; margin-bottom: 20px; }
+        .hero-meta { font-size: 0.95em; opacity: 0.85; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 50px 30px 80px; }
+
+        .objectives {
+            background: white;
+            border-radius: 12px;
+            padding: 30px 35px;
+            margin-bottom: 35px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid #556B2F;
+        }
+
+        .objectives h2 { color: #556B2F; font-size: 1.4em; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .objectives ul { list-style: none; }
+        .objectives li { padding: 8px 0; padding-left: 30px; position: relative; color: var(--text-secondary); }
+        .objectives li::before { content: "✓"; position: absolute; left: 0; color: #556B2F; font-weight: bold; }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .section h2 {
+            color: var(--primary-dark);
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section h3 { color: #556B2F; font-size: 1.2em; margin: 25px 0 15px; }
+        .section p { margin-bottom: 15px; text-align: justify; }
+
+        .key-concept {
+            background: linear-gradient(135deg, #F0FFF0, #E8F5E9);
+            border-left: 5px solid #556B2F;
+            padding: 25px;
+            border-radius: 0 10px 10px 0;
+            margin: 25px 0;
+        }
+
+        .key-concept h4 { color: #2E4A2E; margin-bottom: 12px; font-size: 1.1em; display: flex; align-items: center; gap: 8px; }
+        .key-concept p { margin-bottom: 10px; }
+        .key-concept p:last-child { margin-bottom: 0; }
+
+        .critical-note {
+            background: #FFF8DC;
+            border-left: 5px solid #DAA520;
+            padding: 20px 25px;
+            border-radius: 0 10px 10px 0;
+            margin: 25px 0;
+        }
+
+        .critical-note h4 { color: #B8860B; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+
+        .formula-box {
+            background: #F5F5F5;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+        }
+
+        .formula-box .formula { font-size: 1.2em; color: var(--primary-dark); margin-bottom: 10px; }
+        .formula-box .formula-note { font-size: 0.9em; color: var(--text-secondary); font-family: 'Source Sans 3', sans-serif; }
+
+        .classification-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.95em;
+        }
+
+        .classification-table th {
+            background: #556B2F;
+            color: white;
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 500;
+        }
+
+        .classification-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .classification-table tr:nth-child(even) { background: #FAF8F5; }
+        .classification-table tr:hover { background: #F0FFF0; }
+
+        .content-list { margin: 15px 0 20px 20px; }
+        .content-list li { margin-bottom: 10px; padding-left: 5px; }
+        .content-list li strong { color: var(--primary-dark); }
+
+        .reference-box {
+            background: #F5F5F5;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+
+        .reference-box h4 { color: var(--text-secondary); font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .reference-box p { color: var(--text-secondary); margin-bottom: 5px; font-style: italic; }
+
+        .key-points {
+            background: linear-gradient(135deg, #3D5229, #556B2F);
+            color: white;
+            border-radius: 12px;
+            padding: 35px;
+        }
+
+        .key-points h2 { color: white; border-bottom-color: rgba(255, 255, 255, 0.3); }
+        .key-points ul { list-style: none; }
+        .key-points li { padding: 10px 0; padding-left: 30px; position: relative; opacity: 0.95; }
+        .key-points li::before { content: "📌"; position: absolute; left: 0; }
+
+        .quiz-section { background: white; border-radius: 12px; padding: 35px; box-shadow: var(--shadow); }
+        .quiz-section h2 { color: var(--primary-dark); margin-bottom: 15px; }
+        .quiz-intro { color: var(--text-secondary); margin-bottom: 25px; }
+
+        .start-quiz-btn {
+            background: var(--module-gradient);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .start-quiz-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(85, 107, 47, 0.35); }
+
+        .quiz-card { background: #FDFCFB; border: 1px solid var(--border); border-radius: 12px; padding: 30px; }
+        .quiz-progress { margin-bottom: 25px; }
+        .progress-text { font-size: 0.9em; color: var(--text-secondary); margin-bottom: 8px; }
+        .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--module-gradient); transition: width 0.4s ease; }
+        .question-text { font-size: 1.15em; margin-bottom: 25px; color: var(--text-primary); line-height: 1.6; }
+        .options-container { display: flex; flex-direction: column; gap: 12px; }
+
+        .option-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            font-family: inherit;
+            font-size: 1em;
+        }
+
+        .option-btn:hover:not(:disabled) { border-color: #556B2F; background: #F0FFF0; }
+        .option-btn.correct { border-color: #27ae60; background: #e8f8f0; }
+        .option-btn.incorrect { border-color: #e74c3c; background: #fdf0f0; }
+        .option-btn:disabled { cursor: default; }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #556B2F;
+            color: white;
+            font-weight: 600;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .option-text { padding-top: 4px; }
+        .feedback-box { display: none; margin-top: 25px; }
+        .correct-feedback { background: #e8f8f0; border-left: 4px solid #27ae60; padding: 20px; border-radius: 0 8px 8px 0; }
+        .incorrect-feedback { background: #fdf0f0; border-left: 4px solid #e74c3c; padding: 20px; border-radius: 0 8px 8px 0; }
+        .feedback-box strong { display: block; margin-bottom: 8px; }
+        .quiz-navigation { display: flex; justify-content: space-between; margin-top: 25px; gap: 15px; }
+
+        .quiz-nav-btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            background: var(--module-gradient);
+            color: white;
+            cursor: pointer;
+            font-size: 1em;
+            font-family: inherit;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .quiz-nav-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(85, 107, 47, 0.25); }
+
+        .results-card { text-align: center; padding: 40px 20px; }
+        .results-emoji { font-size: 4em; margin-bottom: 15px; }
+        .results-card h3 { font-size: 1.8em; color: var(--primary-dark); margin-bottom: 20px; }
+        .score-display { font-size: 3.5em; font-family: 'Crimson Pro', serif; margin: 15px 0; }
+        .score-number { color: #556B2F; font-weight: 600; }
+        .score-divider { color: var(--text-secondary); margin: 0 5px; }
+        .score-total { color: var(--text-secondary); }
+        .score-percentage { font-size: 1.4em; color: var(--text-secondary); margin-bottom: 30px; }
+
+        .retry-btn {
+            padding: 15px 40px;
+            background: var(--module-gradient);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .retry-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(85, 107, 47, 0.3); }
+
+        .module-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 20px; flex-wrap: wrap; }
+
+        .module-nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 24px;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .module-nav-btn:hover { border-color: #556B2F; background: #F0FFF0; }
+        .module-nav-btn.next { margin-left: auto; }
+
+        footer { background: var(--primary-dark); color: white; padding: 40px 30px; text-align: center; }
+        .footer-content h4 { font-size: 1.2em; font-weight: 500; margin-bottom: 10px; font-family: 'Crimson Pro', serif; }
+        .footer-content p { opacity: 0.85; font-size: 0.95em; margin-bottom: 5px; }
+        .footer-content a { color: var(--accent); }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero { padding: 110px 20px 50px; }
+            .hero h1 { font-size: 2em; }
+            .container { padding: 30px 20px 60px; }
+            .section, .objectives { padding: 25px 20px; }
+            .classification-table { font-size: 0.85em; }
+            .classification-table th, .classification-table td { padding: 10px 12px; }
+            .module-nav { flex-direction: column; }
+            .module-nav-btn { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-bar">
+        <a href="index.html" class="nav-brand"><span>🪨</span><span>Sedimentary Petrology</span></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="module1_tectonics.html">Module 1</a>
+            <a href="module2_weathering.html" class="active">Module 2</a>
+            <a href="module3_lithology.html">Module 3</a>
+            <a href="module4_transport.html">Module 4</a>
+            <a href="module5_diagenesis.html">Module 5</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Weathering & Sand Generation</h1>
+            <p class="hero-subtitle">From bedrock to detritus: processes and controls</p>
+            <p class="hero-meta">📖 Module 2 of 5 • Estimated time: 50 minutes</p>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="objectives">
+            <h2>🎯 Learning Objectives</h2>
+            <ul>
+                <li>Distinguish between chemical and mechanical weathering processes and their effects on sediment composition</li>
+                <li>Understand the Sand Generation Index (SGI) concept and its application to mixed lithologies</li>
+                <li>Critically evaluate the Chemical Index of Alteration (CIA) and its limitations</li>
+                <li>Explain why relief is the dominant control on provenance signal preservation</li>
+                <li>Recognize petrographic evidence of weathering in framework grains</li>
+                <li>Understand the role of temporary storage in enhancing weathering</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>1. Weathering: The Foundation of Sediment Generation</h2>
+            
+            <p>Weathering represents the first step in the sedimentary cycle, transforming coherent bedrock into loose detritus that can be transported by surface processes. The interaction of <strong>precipitation and temperature</strong> determines the kinetics of chemical reactions and ultimately controls the degree of rock alteration (Johnsson, 1993; Caracciolo, 2020).</p>
+
+            <p>Two fundamental weathering mechanisms operate in surface environments:</p>
+
+            <ul class="content-list">
+                <li><strong>Chemical weathering:</strong> Dissolution, hydrolysis, and oxidation reactions that alter mineral chemistry and produce secondary minerals (clays, oxides)</li>
+                <li><strong>Mechanical weathering:</strong> Physical fragmentation by frost wedging, thermal expansion, root growth, and abrasion during transport</li>
+            </ul>
+
+            <div class="key-concept">
+                <h4>🔑 Key Concept: Climate-Lithology Interaction</h4>
+                <p>The mineralogical and textural parameters of lithologies exposed to surface processes are the ultimate controls on sediment production. Different rock types respond differently to the same climatic conditions, and the same rock type weathers differently under different climates.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>2. The Sand Generation Index (SGI)</h2>
+
+            <p>Palomares and Arribas (1993) introduced the <strong>Sand Generation Index (SGI)</strong> to quantify the capacity of different lithologies to produce sand-sized sediment relative to a reference rock type. This concept recognizes that in any given tectonic and climatic setting, different source rocks contribute disproportionately to the sand fraction.</p>
+
+            <table class="classification-table">
+                <thead>
+                    <tr>
+                        <th>Lithology</th>
+                        <th>SGI Range</th>
+                        <th>Primary Products</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Granitoids</strong></td>
+                        <td>2.0–2.5</td>
+                        <td>High sand production; quartz + feldspar + mica</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gneisses</strong></td>
+                        <td>1.66–2.0</td>
+                        <td>High sand production; similar to granitoids</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Slate-Schists</strong></td>
+                        <td>1.04–1.77</td>
+                        <td>Moderate-low sand; dominantly silt and clay</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Volcanic rocks</strong></td>
+                        <td>Variable (low)</td>
+                        <td>Lithic fragments, silt-sized minerals, phenocrysts</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Carbonates</strong></td>
+                        <td>Very low</td>
+                        <td>Dissolution dominates; little sand production</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sandstones</strong></td>
+                        <td>~1.0 (recycled)</td>
+                        <td>Recycled sand-sized grains</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="critical-note">
+                <h4>⚠️ Important Implication</h4>
+                <p>The SGI concept means that <strong>the abundance of a lithology in the drainage basin does NOT directly predict its contribution to the sand fraction</strong>. Hatzenbühler et al. (2022) demonstrated that even when volcanic grains are practically absent in sand, up to 20% of the source area may be volcanic rocks—they simply don't generate much sand.</p>
+            </div>
+
+            <div class="reference-box">
+                <h4>Key Studies</h4>
+                <p>Palomares, M. & Arribas, J. (1993). Modern stream sands from compound crystalline sources. JSR 63, 146–161.</p>
+                <p>Arribas, J. & Tortosa, A. (2003). Detrital modes in sedimentolithoclastic sands from low-order streams. Sedimentary Geology 159, 253–267.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>3. Chemical Weathering and Its Measurement</h2>
+
+            <h3>3.1 The Chemical Index of Alteration (CIA)</h3>
+
+            <p>The most widely used geochemical proxy for weathering intensity is the <strong>Chemical Index of Alteration</strong> (Nesbitt & Young, 1982):</p>
+
+            <div class="formula-box">
+                <div class="formula">CIA = [Al₂O₃ / (Al₂O₃ + CaO* + Na₂O + K₂O)] × 100</div>
+                <div class="formula-note">*CaO corrected for carbonate and apatite contributions</div>
+            </div>
+
+            <p>The CIA theoretically measures the conversion of feldspars to clay minerals. Fresh granitoids have CIA values around 45–55, while intensely weathered tropical soils approach 100 (kaolinite = 100).</p>
+
+            <h3>3.2 Critical Limitations of CIA</h3>
+
+            <p>Despite its popularity, the CIA suffers from fundamental problems that limit its usefulness in provenance studies:</p>
+
+            <ul class="content-list">
+                <li><strong>Provenance dominance:</strong> In high-relief settings, CIA values primarily reflect source rock composition rather than weathering intensity (Garzanti & Resentini, 2016)</li>
+                <li><strong>Hydraulic sorting bias:</strong> Grain-size fractionation affects element distribution—clays concentrate Al, while sands retain more alkalis</li>
+                <li><strong>Diagenetic modification:</strong> K-metasomatism can reset original CIA values; CaO in cements contaminates the signal</li>
+                <li><strong>Mixed sources:</strong> CIA cannot distinguish weathered felsic sources from fresh mafic sources, which naturally have different chemistries</li>
+            </ul>
+
+            <div class="key-concept">
+                <h4>🔑 Key Insight: Hatzenbühler et al. (2022)</h4>
+                <p>In high-relief tropical drainages of the Sierra Nevada de Santa Marta (Colombia), <strong>traditional chemical weathering indices fail to detect weathering signals</strong>. Bulk compositions show low CIA values (unweathered region) despite clear petrographic evidence of feldspar alteration. This is typical for dynamic orogenic settings where physical erosion outruns chemical weathering.</p>
+            </div>
+
+            <h3>3.3 Alternative Approaches</h3>
+
+            <p>More reliable weathering assessment combines:</p>
+            <ul class="content-list">
+                <li><strong>Petrographic observation:</strong> Feldspar alteration stages, corrosion features, sericitization</li>
+                <li><strong>αAl-values:</strong> Element-specific weathering indices that track individual element mobility</li>
+                <li><strong>Clay mineralogy:</strong> Weathering recorded in the fine fraction (kaolinite, smectite assemblages)</li>
+                <li><strong>Heavy mineral stability indices:</strong> ZTR index, ATi (apatite-tourmaline index)</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>4. Relief: The Master Control</h2>
+
+            <p>Perhaps the most important insight from modern provenance studies is that <strong>relief is the dominant factor controlling whether weathering modifies provenance signals</strong> (Garzanti, 2016; Caracciolo, 2020).</p>
+
+            <h3>4.1 The Relief-Weathering Relationship</h3>
+
+            <table class="classification-table">
+                <thead>
+                    <tr>
+                        <th>Setting</th>
+                        <th>Relief</th>
+                        <th>Residence Time</th>
+                        <th>Weathering Effect</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>High relief / Orogenic</strong></td>
+                        <td>Steep slopes, rapid erosion</td>
+                        <td>Short</td>
+                        <td>Provenance preserved; chemical weathering minimal</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Moderate relief</strong></td>
+                        <td>Transitional</td>
+                        <td>Intermediate</td>
+                        <td>Variable; depends on lithology and climate</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Low relief / Cratonic</strong></td>
+                        <td>Gentle slopes, slow erosion</td>
+                        <td>Long</td>
+                        <td>Intense weathering; quartz enrichment; provenance obscured</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="key-concept">
+                <h4>🔑 Key Concept: Physical Erosion Outpaces Chemical Weathering</h4>
+                <p>In high-relief settings, <strong>erosion rates exceed weathering rates</strong>. Fresh bedrock is continuously exposed and removed before significant chemical alteration can occur. This explains why Himalayan-derived sediments preserve provenance signals despite traveling through monsoon climates where intense chemical weathering would be expected.</p>
+            </div>
+
+            <h3>4.2 Case Study: Neighboring Drainages with Same Climate</h3>
+
+            <p>Hatzenbühler et al. (2022) compared the Tapias and Jeréz rivers in Colombia—same lithological assemblage, same climate, but different relief:</p>
+
+            <ul class="content-list">
+                <li><strong>Jeréz (steeper relief):</strong> Shorter residence time → better preserved feldspars, lower weathering stages</li>
+                <li><strong>Tapias (gentler relief):</strong> Longer residence time → intensive sericitization and corrosion of feldspars</li>
+            </ul>
+
+            <p>This demonstrates that <strong>relief controls weathering intensity independently of climate</strong>.</p>
+        </section>
+
+        <section class="section">
+            <h2>5. Mechanical Weathering and the Maturity Question</h2>
+
+            <h3>5.1 Mechanical Breakdown During Transport</h3>
+
+            <p>Mechanical weathering during fluvial transport has been traditionally assumed to progressively "mature" sediments by selectively destroying labile minerals. However, modern studies challenge this assumption:</p>
+
+            <ul class="content-list">
+                <li>Studies on granitoid weathering profiles show Q/F increases of only <strong>2–20%</strong> from bedrock to transported sand (Le Pera et al., 2001; von Eynatten et al., 2016)</li>
+                <li>Most compositional modification occurs during <strong>soil formation and grus development</strong>, not during transport</li>
+                <li>Extreme mechanical weathering in <strong>glacial environments</strong> can cause up to 50% feldspar loss (Caracciolo et al., 2012b)</li>
+            </ul>
+
+            <div class="critical-note">
+                <h4>⚠️ The Maturity Myth (Preview)</h4>
+                <p>The traditional concept that transport progressively matures sediments toward quartz-rich compositions is largely incorrect. This "Maturity Myth" will be examined in detail in Module 4 (Transport), where we will see that <strong>compositional maturation requires chemical weathering or diagenesis, not physical transport</strong>.</p>
+            </div>
+
+            <h3>5.2 Temporary Storage: A Hidden Weathering Reactor</h3>
+
+            <p>Sediment temporarily stored in <strong>floodplains, terraces, and bars</strong> experiences extended residence time in the weathering environment. This can significantly enhance chemical alteration:</p>
+
+            <ul class="content-list">
+                <li>Floodplain storage exposes sand to soil-forming processes</li>
+                <li>Oxidation, clay infiltration, and dissolution occur during storage</li>
+                <li>Remobilized sediment may be significantly more weathered than first-cycle material</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>6. Petrographic Recognition of Weathering</h2>
+
+            <p>Thin-section petrography provides the most direct evidence of weathering intensity in sand samples:</p>
+
+            <h3>6.1 Feldspar Alteration Stages</h3>
+
+            <table class="classification-table">
+                <thead>
+                    <tr>
+                        <th>Stage</th>
+                        <th>Description</th>
+                        <th>Petrographic Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Fresh (1)</strong></td>
+                        <td>Unaltered</td>
+                        <td>Clear crystals, sharp extinction, intact twinning</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Slight (2)</strong></td>
+                        <td>Incipient alteration</td>
+                        <td>Dusty appearance, minor sericite, corroded edges</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Moderate (3)</strong></td>
+                        <td>Significant alteration</td>
+                        <td>Patchy sericite, dissolution pits, cloudy cores</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Strong (4)</strong></td>
+                        <td>Advanced alteration</td>
+                        <td>Pervasive sericitization, skeletal outlines, corrosion holes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Complete (5)</strong></td>
+                        <td>Nearly destroyed</td>
+                        <td>Clay pseudomorphs, only remnant grain shapes</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>6.2 Heavy Mineral Stability</h3>
+
+            <p>Heavy minerals record weathering through differential dissolution. The classic stability sequence (from unstable to stable):</p>
+
+            <p style="text-align: center; font-weight: 500; color: var(--primary-dark); margin: 20px 0;">
+                Olivine < Pyroxene < Amphibole < Epidote < Garnet < Apatite < Titanite < Tourmaline < Rutile < Zircon
+            </p>
+
+            <p>The <strong>ZTR index</strong> (% zircon + tourmaline + rutile among transparent heavy minerals) increases with weathering/recycling intensity.</p>
+        </section>
+
+        <section class="section key-points">
+            <h2>📌 Key Points Summary</h2>
+            <ul>
+                <li>Weathering transforms bedrock to detritus through chemical and mechanical processes</li>
+                <li>The Sand Generation Index (SGI) quantifies differential sand production from different lithologies</li>
+                <li>Granitoids and gneisses produce the most sand; volcanics and carbonates produce little</li>
+                <li>CIA is widely used but suffers from provenance dominance, sorting bias, and diagenetic overprinting</li>
+                <li>Relief is the master control—high relief preserves provenance signals even in wet climates</li>
+                <li>Physical erosion outpaces chemical weathering in orogenic settings</li>
+                <li>Temporary storage in floodplains extends residence time and enhances weathering</li>
+                <li>Petrographic feldspar alteration stages provide direct evidence of weathering intensity</li>
+                <li>Heavy mineral stability sequences record progressive weathering/diagenetic dissolution</li>
+            </ul>
+        </section>
+
+        <section class="section quiz-section">
+            <h2>🎯 Self-Assessment Quiz</h2>
+            <p class="quiz-intro">Test your understanding of weathering processes and sand generation.</p>
+            <button onclick="startQuiz()" class="start-quiz-btn">Start Quiz</button>
+            <div id="quiz-container"></div>
+        </section>
+
+        <div class="module-nav">
+            <a href="module1_tectonics.html" class="module-nav-btn">← Previous: Tectonic Controls</a>
+            <a href="module3_lithology.html" class="module-nav-btn next">Next: Lithology & Framework Grains →</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <h4>GeoZentrum Nordbayern</h4>
+            <p>Friedrich-Alexander-Universität Erlangen-Nürnberg</p>
+            <p>Course Instructor: <a href="mailto:luca.caracciolo@fau.de">PD Dr. Luca Caracciolo</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const quizQuestions = [
+            {
+                question: "What does the Sand Generation Index (SGI) measure?",
+                options: [
+                    "The rate of chemical weathering in different climates",
+                    "The capacity of different lithologies to produce sand-sized sediment",
+                    "The transport distance required to generate mature sand",
+                    "The degree of diagenetic modification in sandstones"
+                ],
+                correct: 1,
+                explanation: "The SGI (Palomares & Arribas, 1993) quantifies the relative capacity of different rock types to produce sand-sized sediment. Granitoids and gneisses have high SGI values (2.0-2.5), while volcanic rocks, carbonates, and fine-grained metamorphics produce much less sand."
+            },
+            {
+                question: "According to Hatzenbühler et al. (2022), if volcanic grains are practically absent in a sand sample, what percentage of the drainage basin could still be volcanic rocks?",
+                options: [
+                    "0%—no volcanic signal means no volcanic sources",
+                    "Up to 5%",
+                    "Up to 20%",
+                    "Up to 50%"
+                ],
+                correct: 2,
+                explanation: "Hatzenbühler et al. (2022) demonstrated that volcanic rocks significantly undercontribute to the sand fraction. Even when volcanic grains are practically absent, up to 20% of the source area may be volcanic—these rocks simply have low SGI and produce little sand."
+            },
+            {
+                question: "What is the main limitation of the Chemical Index of Alteration (CIA) in high-relief orogenic settings?",
+                options: [
+                    "It cannot be calculated for siliciclastic sediments",
+                    "CIA values primarily reflect provenance rather than weathering intensity",
+                    "The formula requires rare element analysis",
+                    "CIA only works for carbonate-rich sediments"
+                ],
+                correct: 1,
+                explanation: "In high-relief settings where physical erosion outpaces chemical weathering, CIA values primarily reflect the composition of source rocks rather than weathering intensity. Fresh mafic sources naturally have different CIA than fresh felsic sources, independent of weathering."
+            },
+            {
+                question: "Why does high relief preserve provenance signals even in wet tropical climates?",
+                options: [
+                    "High relief increases temperature, which destroys weathering agents",
+                    "Steep slopes prevent rainfall from reaching bedrock",
+                    "Rapid erosion removes material before significant chemical alteration occurs",
+                    "High relief causes sediment to bypass the weathering environment entirely"
+                ],
+                correct: 2,
+                explanation: "In high-relief settings, erosion rates exceed weathering rates. Fresh bedrock is continuously exposed and removed before chemical weathering can significantly alter the mineral composition. This is why Himalayan sediments preserve provenance signals despite traversing monsoon climates."
+            },
+            {
+                question: "What happens to sediment during temporary storage in floodplains?",
+                options: [
+                    "Nothing—storage is a passive process",
+                    "Only physical sorting occurs",
+                    "Extended residence time allows enhanced chemical weathering",
+                    "Sediment is protected from all weathering"
+                ],
+                correct: 2,
+                explanation: "Temporary storage in floodplains, terraces, and bars exposes sediment to soil-forming processes for extended periods. This increases residence time in the weathering environment, allowing oxidation, clay infiltration, and dissolution to modify sediment composition."
+            },
+            {
+                question: "Which lithology has the highest Sand Generation Index (SGI)?",
+                options: [
+                    "Volcanic rocks",
+                    "Carbonates",
+                    "Slate-schists",
+                    "Granitoids"
+                ],
+                correct: 3,
+                explanation: "Granitoids have the highest SGI (2.0-2.5), meaning they produce the most sand-sized sediment per unit area. Their coarse crystalline texture and high quartz + feldspar content favor sand generation. Carbonates tend to dissolve, volcanics produce mainly fines, and schists generate silt."
+            },
+            {
+                question: "In petrographic analysis, what does Stage 3 feldspar weathering look like?",
+                options: [
+                    "Fresh, clear crystals with sharp extinction",
+                    "Patchy sericite, dissolution pits, and cloudy cores",
+                    "Complete clay pseudomorphs with only remnant grain shapes",
+                    "Dusty appearance with minor edge corrosion"
+                ],
+                correct: 1,
+                explanation: "Stage 3 (moderate alteration) shows patchy sericite development, dissolution pits, and cloudy cores. Stage 1 is fresh, Stage 2 shows incipient alteration (dusty, minor sericite), Stage 4 has pervasive sericitization, and Stage 5 represents near-complete destruction to clay."
+            },
+            {
+                question: "What does an increasing ZTR index indicate?",
+                options: [
+                    "Decreasing transport distance",
+                    "Increasing volcanic input",
+                    "Increasing weathering or recycling intensity",
+                    "Decreasing diagenetic modification"
+                ],
+                correct: 2,
+                explanation: "The ZTR index (% zircon + tourmaline + rutile) increases as less stable heavy minerals are selectively removed by weathering or diagenetic dissolution. High ZTR indicates either intense source-area weathering or sedimentary recycling. These ultrastable minerals survive multiple sedimentary cycles."
+            },
+            {
+                question: "Comparing the Tapias and Jeréz rivers (same lithology, same climate, different relief), which showed more weathered feldspars?",
+                options: [
+                    "Jeréz (steeper relief)",
+                    "Tapias (gentler relief)",
+                    "Both showed equal weathering",
+                    "Neither showed significant weathering"
+                ],
+                correct: 1,
+                explanation: "Tapias, with gentler relief, showed more intensely weathered feldspars (mean weathering stages 2.3-2.9) compared to Jeréz (steeper relief, stages 1.9-2.5). This demonstrates that relief controls weathering intensity independently of climate—longer residence time in Tapias allowed more chemical alteration."
+            },
+            {
+                question: "What is the correct formula for the Chemical Index of Alteration (CIA)?",
+                options: [
+                    "CIA = [SiO₂ / (SiO₂ + Al₂O₃)] × 100",
+                    "CIA = [Al₂O₃ / (Al₂O₃ + CaO* + Na₂O + K₂O)] × 100",
+                    "CIA = [K₂O / (K₂O + Na₂O + CaO*)] × 100",
+                    "CIA = [Fe₂O₃ / (Fe₂O₃ + MgO + Al₂O₃)] × 100"
+                ],
+                correct: 1,
+                explanation: "The CIA formula is [Al₂O₃ / (Al₂O₃ + CaO* + Na₂O + K₂O)] × 100, where CaO* is corrected for carbonate and apatite. It measures the proportion of immobile Al₂O₃ relative to mobile alkalis, theoretically tracking feldspar-to-clay conversion. Fresh granites have CIA ~50; pure kaolinite = 100."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+
+        function startQuiz() {
+            document.querySelector('.start-quiz-btn').style.display = 'none';
+            currentQuestion = 0;
+            score = 0;
+            answered = false;
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = quizQuestions[currentQuestion];
+            const container = document.getElementById('quiz-container');
+            
+            container.innerHTML = `
+                <div class="quiz-card">
+                    <div class="quiz-progress">
+                        <div class="progress-text">Question ${currentQuestion + 1} of ${quizQuestions.length}</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${((currentQuestion + 1) / quizQuestions.length) * 100}%"></div>
+                        </div>
+                    </div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options-container">
+                        ${q.options.map((opt, i) => `
+                            <button class="option-btn" onclick="selectAnswer(${i})" id="option-${i}">
+                                <span class="option-letter">${String.fromCharCode(65 + i)}</span>
+                                <span class="option-text">${opt}</span>
+                            </button>
+                        `).join('')}
+                    </div>
+                    <div id="feedback" class="feedback-box"></div>
+                    <div class="quiz-navigation">
+                        <button onclick="previousQuestion()" class="quiz-nav-btn" ${currentQuestion === 0 ? 'disabled' : ''}>← Previous</button>
+                        <button onclick="nextQuestion()" class="quiz-nav-btn" id="next-btn" disabled>${currentQuestion === quizQuestions.length - 1 ? 'See Results' : 'Next →'}</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectAnswer(index) {
+            if (answered) return;
+            answered = true;
+            const q = quizQuestions[currentQuestion];
+            const isCorrect = index === q.correct;
+            if (isCorrect) score++;
+            document.getElementById(`option-${index}`).classList.add(isCorrect ? 'correct' : 'incorrect');
+            if (!isCorrect) document.getElementById(`option-${q.correct}`).classList.add('correct');
+            document.querySelectorAll('.option-btn').forEach(btn => btn.disabled = true);
+            const feedback = document.getElementById('feedback');
+            feedback.innerHTML = `<div class="${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}"><strong>${isCorrect ? '✓ Correct!' : '✗ Incorrect'}</strong><p>${q.explanation}</p></div>`;
+            feedback.style.display = 'block';
+            document.getElementById('next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < quizQuestions.length - 1) { currentQuestion++; answered = false; loadQuestion(); }
+            else { showResults(); }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) { currentQuestion--; answered = false; loadQuestion(); }
+        }
+
+        function showResults() {
+            const percentage = Math.round((score / quizQuestions.length) * 100);
+            let message, emoji;
+            if (percentage >= 90) { message = 'Outstanding!'; emoji = '🌟'; }
+            else if (percentage >= 75) { message = 'Great work!'; emoji = '👏'; }
+            else if (percentage >= 60) { message = 'Good effort!'; emoji = '👍'; }
+            else { message = 'Keep studying!'; emoji = '📚'; }
+            document.getElementById('quiz-container').innerHTML = `
+                <div class="results-card">
+                    <div class="results-emoji">${emoji}</div>
+                    <h3>${message}</h3>
+                    <div class="score-display"><span class="score-number">${score}</span><span class="score-divider">/</span><span class="score-total">${quizQuestions.length}</span></div>
+                    <div class="score-percentage">${percentage}%</div>
+                    <button onclick="startQuiz()" class="retry-btn">Try Again</button>
+                </div>
+            `;
+        }
+    </script>
+
+</body>
+</html>
